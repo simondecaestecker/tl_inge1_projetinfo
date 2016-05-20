@@ -5,7 +5,7 @@ public class Groupe {
 	private int id;
 	private int nombre;
 	
-	Groupe(int id){
+	public Groupe(int id){
 		this.id = id;	
 		this.nombre = 0;
 	}
