@@ -15,6 +15,10 @@ public class Utilisateur {
 		this.id = id;
 	}
 	
+	public int getId(){
+		return id;
+	}
+	
 	
 
 }

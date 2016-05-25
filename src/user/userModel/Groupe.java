@@ -1,12 +1,11 @@
 package userModel;
-
-import java.util.LinkedList;
+import java.util.HashMap;
 
 public class Groupe {
 
 	private int id;
 	private int nombre;
-	private LinkedList<Etudiant> groupe;
+	private HashMap<Integer, Etudiant> groupe;
 	
 	public Groupe(int id){
 		this.id = id;	
@@ -30,10 +29,12 @@ public class Groupe {
 	}
 	
 	public void addEtudiant(Etudiant etudiant){
-		groupe.add(etudiant);
+		groupe.put(etudiant.getId(), etudiant);
+		nombre++;
 	}
 	
 	public void removeEtudiant(Etudiant etudiant){
-		groupe.remove(etudiant);
+		groupe.remove(etudiant.getId());
+		nombre--;
 	}
 }
