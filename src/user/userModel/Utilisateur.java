@@ -1,11 +1,11 @@
 package userModel;
 
 public class Utilisateur {
-	private String login;
-	private String password;
-	private String nom;
-	private String prenom;
-	private int id;
+	protected String login;
+	protected String password;
+	protected String nom;
+	protected String prenom;
+	protected int id;
 	
 	public Utilisateur(String login, String password, String nom, String prenom, int id){
 		this.login = login;
