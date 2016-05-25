@@ -22,6 +22,10 @@ public class UserDB {
 	 */
 	private String file;
 	
+	private int nextStudentId;
+	private int nextTeacherId;
+	private int nextAdministratorId;
+	
 	/**
 	 * 
 	 * Constructeur de UserDB. 
@@ -57,5 +61,28 @@ public class UserDB {
 	
 	public void setFile(String file) {
 		this.file = file;
+	}
+	
+	public int getNextStudentId(){
+		return nextStudentId;
+	}
+	
+	public int getNextTeacherId(){
+		return nextTeacherId;
+	}
+	
+	public int getNextAdministratorId(){
+		return nextAdministratorId;
+	}
+	
+	public void incNextStudentId(){
+		nextStudentId++;
+	}
+	
+	public void incNextTeacherId(){
+		nextTeacherId++;
+	}
+	public void incNextAdministratorId(){
+		nextAdministratorId++;
 	}
 }
