@@ -8,5 +8,9 @@ public class Etudiant extends Utilisateur{
 		super(login, password, nom, prenom, id);
 		this.idGroupe = 0;
 	}
+	
+	public int getIdGroupe(){
+		return idGroupe;
+	}
 
 }

@@ -1,6 +1,7 @@
 package userController;
 
 import userModel.UserDB;
+import userModel.Etudiant;
 /**
  * Cette classe est le contrôleur d'utilisateurs que vous devez implémenter. 
  * Elle contient un attribut correspondant à la base de données utilisateurs que vous allez créer.
@@ -36,8 +37,12 @@ public class UserController implements IUserController
 
 	@Override
 	public String getUserName(String userLogin) {
-		// TODO Auto-generated method stub
-		return null;
+		if(userDB.getListeUtilisateur().containsKey(userLogin)){
+			return userDB.getListeUtilisateur().get(userLogin).getName();
+		}
+		else{
+			return null;
+		}
 	}
 
 	@Override
@@ -48,8 +53,12 @@ public class UserController implements IUserController
 
 	@Override
 	public int getStudentGroup(String studentLogin) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(userDB.getListeUtilisateur().get(studentLogin) instanceof Etudiant){
+			return ((Etudiant)(userDB.getListeUtilisateur().get(studentLogin))).getIdGroupe();
+		}
+		else{
+			return 0;
+		}
 	}
 
 	@Override

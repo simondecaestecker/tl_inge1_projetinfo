@@ -19,6 +19,10 @@ public class Utilisateur {
 		return id;
 	}
 	
+	public String getName(){
+		return prenom+nom;
+	}
+	
 	
 
 }

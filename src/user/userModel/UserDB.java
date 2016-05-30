@@ -1,5 +1,7 @@
 package userModel;
 
+import java.util.HashMap;
+
 /**
  * 
  * Cette classe gére la base de données d'utilisateurs. Elle doit permettre de sauvegarder et charger les utilisateurs et les groupes à partir d'un fichier XML. 
@@ -21,6 +23,9 @@ public class UserDB {
 	 * 
 	 */
 	private String file;
+	
+	private HashMap<String, Utilisateur> utilisateur;
+	private HashMap<Integer, Groupe> groupe;
 	
 	/**
 	 * 
@@ -57,5 +62,13 @@ public class UserDB {
 	
 	public void setFile(String file) {
 		this.file = file;
+	}
+	
+	public HashMap<String, Utilisateur> getListeUtilisateur(){
+		return utilisateur;
+	}
+	
+	public HashMap<Integer, Groupe> getListeGroupe(){
+		return groupe;
 	}
 }
