@@ -7,16 +7,15 @@ public class Administrateur extends Utilisateur {
 	
 	public boolean createUser(String login, String password, String nom, String prenom, int id, int type) {
 		if (type == 0) {
-			//Administrateur
 			Administrateur newUser = new Administrateur(login, password, nom, prenom, id);
 			return true;
 		}
 		else if (type == 1) {
-			Professeur newUser = new Professeur(login, password, nom, prenom, /*1000 + */id);
+			Professeur newUser = new Professeur(login, password, nom, prenom, id);
 			return true;
 		}
 		else if (type == 2) {
-			Etudiant newUser = new Etudiant(login, password, nom, prenom, /*2000 + */id);
+			Etudiant newUser = new Etudiant(login, password, nom, prenom, id);
 			return true;
 		}
 		else {
@@ -24,16 +23,9 @@ public class Administrateur extends Utilisateur {
 		}		
 	}
 	
-	private boolean createGroup() {
-		return false;
-	}
-	
-	private boolean removeUser() {
-		return false;
-	}
-	
-	private boolean removeGroup() {
-		return false;
+	public Groupe createGroup(int id) {
+		Groupe groupe = new Groupe(id);
+		return groupe;
 	}
 	
 	private boolean addUserGroup() {

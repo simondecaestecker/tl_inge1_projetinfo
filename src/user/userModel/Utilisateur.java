@@ -19,8 +19,28 @@ public class Utilisateur {
 		return id;
 	}
 	
+	public String getPassword(){
+		return password;
+	}
+	
 	public String getName(){
 		return prenom+nom;
+	}
+	
+	public String getClassUser(){
+				
+		if(id <= 999){
+			return "Administrator";
+		}
+		else if(id<=1999){
+			return "Teacher";
+		}
+		else if(id<=2999){
+			return "Student";
+		}
+		else{
+			return null;
+		}
 	}
 	
 	

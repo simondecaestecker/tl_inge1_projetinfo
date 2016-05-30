@@ -1,5 +1,6 @@
 package userModel;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class Groupe {
 
@@ -30,11 +31,19 @@ public class Groupe {
 	
 	public void addEtudiant(Etudiant etudiant){
 		groupe.put(etudiant.getId(), etudiant);
+		etudiant.setIdGroupe(id);
 		nombre++;
 	}
 	
 	public void removeEtudiant(Etudiant etudiant){
 		groupe.remove(etudiant.getId());
+		etudiant.setIdGroupe(0);
 		nombre--;
+	}
+	
+	public void removeAllEtudiant(){
+		for(Entry<Integer, Etudiant> entry : groupe.entrySet()){
+			removeEtudiant(entry.getValue());
+		}
 	}
 }
