@@ -46,4 +46,8 @@ public class Groupe {
 			removeEtudiant(entry.getValue());
 		}
 	}
+	
+	public HashMap<Integer, Etudiant> getEtudiantGroupe(){
+		return groupe;
+	}
 }

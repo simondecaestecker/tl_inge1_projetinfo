@@ -2,6 +2,7 @@ package userController;
 
 import java.util.Map.Entry;
 
+import userModel.Groupe;
 import userModel.UserDB;
 import userModel.Etudiant;
 import userModel.Administrateur;
@@ -171,8 +172,20 @@ public class UserController implements IUserController
 
 	@Override
 	public String[] usersToString() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] users = new String[userDB.getListeGroupe().size()];
+		int i = 0;
+		for(Entry<String, Utilisateur> entry : userDB.getListeUtilisateur().entrySet()){
+			users[i]="Rôle : "+entry.getValue().getClassUser()+"\n";
+			users[i]="Id : "+entry.getValue().getId()+"\n";
+			users[i]="Login : "+entry.getValue().getLogin()+"\n";
+			users[i]="Password : "+entry.getValue().getPassword()+"\n";
+			users[i]="Prénom Nom : "+entry.getValue().getName()+"\n";
+			if(entry.getValue() instanceof Etudiant){
+				users[i]="Groupe : "+((Etudiant) entry.getValue()).getIdGroupe()+"\n";
+			}
+			i++;
+		}
+		return users;
 	}
 
 	@Override
@@ -188,25 +201,41 @@ public class UserController implements IUserController
 
 	@Override
 	public String[] studentsLoginToString() {
-		String[] usersLogin = new String[userDB.getListeUtilisateur().size()];
+		String[] studentsLogin = new String[userDB.getListeUtilisateur().size()];
 		int i = 0;
 		for(Entry<String, Utilisateur> entry : userDB.getListeUtilisateur().entrySet()){
-			usersLogin[i]=entry.getValue().getLogin();
-			i++;
+			if(entry.getValue() instanceof Etudiant){
+				studentsLogin[i]=entry.getValue().getLogin();
+				i++;
+			}
 		}
-		return usersLogin;
+		return studentsLogin;
 	}
 
 	@Override
 	public String[] groupsIdToString() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] groupsId = new String[userDB.getListeGroupe().size()];
+		int i = 0;
+		for(Entry<Integer, Groupe> entry : userDB.getListeGroupe().entrySet()){
+			groupsId[i]=Integer.toString(entry.getValue().getId());
+			i++;
+		}
+		return groupsId;
 	}
 
 	@Override
 	public String[] groupsToString() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] groups = new String[userDB.getListeGroupe().size()];
+		int i = 0;
+		for(Entry<Integer, Groupe> entry : userDB.getListeGroupe().entrySet()){
+			groups[i]="Id : "+entry.getValue().getId()+"\n";
+			groups[i]="Nombre : "+entry.getValue().getNombre()+"\n";
+			for(Entry<Integer, Etudiant> entryStudent : entry.getValue().getEtudiantGroupe().entrySet()){
+				
+			}
+			i++;
+		}
+		return groups;
 	}
 
 	@Override

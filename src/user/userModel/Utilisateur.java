@@ -24,7 +24,15 @@ public class Utilisateur {
 	}
 	
 	public String getName(){
-		return prenom+" "+nom;
+		return getFirstName()+" "+getSurname();
+	}
+	
+	public String getFirstName(){
+		return prenom;
+	}
+	
+	public String getSurname(){
+		return nom;
 	}
 	
 	public String getLogin(){
@@ -46,7 +54,4 @@ public class Utilisateur {
 			return null;
 		}
 	}
-	
-	
-
 }
