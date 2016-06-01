@@ -5,21 +5,18 @@ public class Administrateur extends Utilisateur {
 		super(login, password, nom, prenom, id);
 	}
 	
-	public boolean createUser(String login, String password, String nom, String prenom, int id, int type) {
+	public Utilisateur createUser(String login, String password, String nom, String prenom, int id, int type) {
 		if (type == 0) {
-			Administrateur newUser = new Administrateur(login, password, nom, prenom, id);
-			return true;
+			return new Administrateur(login, password, nom, prenom, id);
 		}
 		else if (type == 1) {
-			Professeur newUser = new Professeur(login, password, nom, prenom, id);
-			return true;
+			return new Professeur(login, password, nom, prenom, id);
 		}
 		else if (type == 2) {
-			Etudiant newUser = new Etudiant(login, password, nom, prenom, id);
-			return true;
+			return new Etudiant(login, password, nom, prenom, id);
 		}
 		else {
-			return false;
+			return null;
 		}		
 	}
 	

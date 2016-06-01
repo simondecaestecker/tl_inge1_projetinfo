@@ -77,14 +77,14 @@ public class UserController implements IUserController
 	}
 
 	@Override
-	public boolean addAdmin(String adminLogin, String newAdminlogin, int adminID, String firstname, String surname,
-			String pwd) {
+	public boolean addAdmin(String adminLogin, String newAdminlogin, int adminID, String firstname, String surname, String pwd) {
 		if(userDB.getListeUtilisateur().containsKey(adminLogin)){
 			return false;
 		}
 		else{
 			if(userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur){
-				return ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newAdminlogin, pwd, surname, firstname, adminID, 0);
+				userDB.getListeUtilisateur().put(newAdminlogin, ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newAdminlogin, pwd, surname, firstname, adminID, 0));
+				return true;
 			}
 			else{
 				return false;
@@ -100,7 +100,8 @@ public class UserController implements IUserController
 		}
 		else{
 			if(userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur){
-				return ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newteacherLogin, pwd, surname, firstname, teacherID, 0);
+				userDB.getListeUtilisateur().put(newteacherLogin, ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newteacherLogin, pwd, surname, firstname, teacherID, 0));
+				return true;
 			}
 			else{
 				return false;
@@ -116,7 +117,8 @@ public class UserController implements IUserController
 		}
 		else{
 			if(userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur){
-				return ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newStudentLogin, pwd, surname, firstname, studentID, 0);
+				userDB.getListeUtilisateur().put(newStudentLogin,((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newStudentLogin, pwd, surname, firstname, studentID, 0));
+				return true;
 			}
 			return false;
 		}
@@ -257,4 +259,3 @@ public class UserController implements IUserController
 	}
 	
 }
-
