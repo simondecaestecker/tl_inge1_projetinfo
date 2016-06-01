@@ -3,10 +3,6 @@ package userModel;
 import java.util.HashMap;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -40,6 +36,8 @@ public class UserDB {
 
 	private HashMap<String, Utilisateur> utilisateurs;
 	private HashMap<Integer, Groupe> groupes;
+	
+	private Administrateur root;
 
 	/**
 	 * 
@@ -53,6 +51,11 @@ public class UserDB {
 	public UserDB(String file){
 		//TODO Fonction Ã  modifier
 		super();
+		
+		this.root = new Administrateur("root", "root", "root", "root", 0);
+		
+		loadDB();
+		
 		this.setFile(file);
 	}
 
@@ -106,9 +109,7 @@ public class UserDB {
 			while(itGroup.hasNext()){
 				Element unGroupElmt = (Element)itGroup.next();
 
-				int groupId = Integer.parseInt(unGroupElmt.getChild("groupId").getText());
-
-				groupes.put(groupId, new Groupe(groupId));
+				groupes.put(Integer.parseInt(unGroupElmt.getChild("groupId").getText()), root.createGroup(Integer.parseInt(unGroupElmt.getChild("groupId").getText())));
 			}
 
 			Element studentsDB = rootElt.getChild("Students");
@@ -117,12 +118,8 @@ public class UserDB {
 
 			while(itStudent.hasNext()){
 				Element unStudentElmt = (Element)itStudent.next();
-
-				String login = unStudentElmt.getChild("login").getText();
-				Etudiant student = new Etudiant(login, unStudentElmt.getChild("pwd").getText(), unStudentElmt.getChild("surname").getText(), unStudentElmt.getChild("firstname").getText(), Integer.parseInt(unStudentElmt.getChild("studentId").getText()));
-				student.setIdGroupe(Integer.parseInt(unStudentElmt.getChild("groupId").getText()));
-
-				utilisateurs.put(login, student);
+				
+				utilisateurs.put(unStudentElmt.getChild("login").getText(), root.createUser(unStudentElmt.getChild("login").getText(), unStudentElmt.getChild("pwd").getText(), unStudentElmt.getChild("surname").getText(), unStudentElmt.getChild("firstname").getText(), Integer.parseInt(unStudentElmt.getChild("studentId").getText()), 2));
 			}
 
 			Element teachersDB = rootElt.getChild("Teachers");
@@ -132,10 +129,7 @@ public class UserDB {
 			while(itTeacher.hasNext()){
 				Element unTeacherElmt = (Element)itTeacher.next();
 
-				String login = unTeacherElmt.getChild("login").getText();
-				Professeur teacher = new Professeur(login, unTeacherElmt.getChild("pwd").getText(), unTeacherElmt.getChild("surname").getText(), unTeacherElmt.getChild("firstname").getText(), Integer.parseInt(unTeacherElmt.getChild("teacherId").getText()));
-
-				utilisateurs.put(login, teacher);
+				utilisateurs.put(unTeacherElmt.getChild("login").getText(), root.createUser(unTeacherElmt.getChild("login").getText(), unTeacherElmt.getChild("pwd").getText(), unTeacherElmt.getChild("surname").getText(), unTeacherElmt.getChild("firstname").getText(), Integer.parseInt(unTeacherElmt.getChild("teacherId").getText()), 1));
 			}
 
 			Element administratorsDB = rootElt.getChild("Students");
@@ -145,10 +139,7 @@ public class UserDB {
 			while(itAdministrator.hasNext()){
 				Element unAdministratorElmt = (Element)itAdministrator.next();
 
-				String login = unAdministratorElmt.getChild("login").getText();
-				Administrateur administrator = new Administrateur(login, unAdministratorElmt.getChild("pwd").getText(), unAdministratorElmt.getChild("surname").getText(), unAdministratorElmt.getChild("firstname").getText(), Integer.parseInt(unAdministratorElmt.getChild("administratorId").getText()));
-
-				utilisateurs.put(login, administrator);
+				utilisateurs.put(unAdministratorElmt.getChild("login").getText(), root.createUser(unAdministratorElmt.getChild("login").getText(), unAdministratorElmt.getChild("pwd").getText(), unAdministratorElmt.getChild("surname").getText(), unAdministratorElmt.getChild("firstname").getText(), Integer.parseInt(unAdministratorElmt.getChild("administratorId").getText()), 0));
 			}
 		}
 
@@ -173,7 +164,6 @@ public class UserDB {
 
 		//Save les Groups
 		for (Entry<Integer, Groupe> entry : groupes.entrySet()) {
-			Integer cle = entry.getKey();
 			Groupe valeur = entry.getValue();
 
 			Element unGroup = new Element("Group");
@@ -186,7 +176,6 @@ public class UserDB {
 
 		//Save les Utilisateurs
 		for (Entry<String, Utilisateur> entry : utilisateurs.entrySet()) {
-			String cle = entry.getKey();
 			Utilisateur valeur = entry.getValue();
 
 			Element unUser = new Element(valeur.getClassUser());
