@@ -24,7 +24,11 @@ public class Utilisateur {
 	}
 	
 	public String getName(){
-		return prenom+nom;
+		return prenom+" "+nom;
+	}
+	
+	public String getLogin(){
+		return login;
 	}
 	
 	public String getClassUser(){

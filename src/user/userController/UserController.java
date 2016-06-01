@@ -1,9 +1,12 @@
 package userController;
 
+import java.util.Map.Entry;
+
 import userModel.UserDB;
 import userModel.Etudiant;
 import userModel.Administrateur;
 import userModel.Professeur;
+import userModel.Utilisateur;
 /**
  * Cette classe est le contrôleur d'utilisateurs que vous devez implémenter. 
  * Elle contient un attribut correspondant à la base de données utilisateurs que vous allez créer.
@@ -135,9 +138,12 @@ public class UserController implements IUserController
 	@Override
 	public boolean addGroup(String adminLogin, int groupId) {
 		if(userDB.getListeUtilisateur().containsKey(adminLogin) && (userDB.getListeGroupe().containsKey(groupId)==false)){
-						
+			userDB.getListeGroupe().put(groupId, ((Administrateur) (userDB.getListeUtilisateur().get(adminLogin))).createGroup(groupId));
+			return true;
 		}
-		return false;
+		else{
+			return false;
+		}
 	}
 
 	@Override
@@ -154,8 +160,13 @@ public class UserController implements IUserController
 
 	@Override
 	public boolean associateStudToGroup(String adminLogin, String studentLogin, int groupId) {
-		// TODO Auto-generated method stub
-		return false;
+		if(userDB.getListeUtilisateur().containsKey(adminLogin) && userDB.getListeUtilisateur().containsKey(studentLogin) && userDB.getListeGroupe().containsKey(groupId)){
+			((Etudiant) (userDB.getListeUtilisateur().get(studentLogin))).setIdGroupe(groupId);
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	@Override
@@ -166,14 +177,24 @@ public class UserController implements IUserController
 
 	@Override
 	public String[] usersLoginToString() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] usersLogin = new String[userDB.getListeUtilisateur().size()];
+		int i = 0;
+		for(Entry<String, Utilisateur> entry : userDB.getListeUtilisateur().entrySet()){
+			usersLogin[i]=entry.getValue().getLogin();
+			i++;
+		}
+		return usersLogin;
 	}
 
 	@Override
 	public String[] studentsLoginToString() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] usersLogin = new String[userDB.getListeUtilisateur().size()];
+		int i = 0;
+		for(Entry<String, Utilisateur> entry : userDB.getListeUtilisateur().entrySet()){
+			usersLogin[i]=entry.getValue().getLogin();
+			i++;
+		}
+		return usersLogin;
 	}
 
 	@Override
@@ -190,14 +211,12 @@ public class UserController implements IUserController
 
 	@Override
 	public boolean loadDB() {
-		// TODO Auto-generated method stub
-		return false;
+		return userDB.loadDB();
 	}
 
 	@Override
 	public boolean saveDB() {
-		// TODO Auto-generated method stub
-		return false;
+		return userDB.saveDB();		
 	}
 
 	public UserDB getUserDB() {
@@ -208,7 +227,5 @@ public class UserController implements IUserController
 		this.userDB = userDB;
 	}
 	
-	
-
 }
 
