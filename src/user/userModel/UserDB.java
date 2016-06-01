@@ -18,22 +18,22 @@ import org.jdom2.output.XMLOutputter;
 
 /**
  * 
- * Cette classe gére la base de données d'utilisateurs. Elle doit permettre de sauvegarder et charger les utilisateurs et les groupes à partir d'un fichier XML. 
- * La structure du fichier XML devra être la même que celle du fichier userDB.xml.
+ * Cette classe gÃ©re la base de donnÃ©es d'utilisateurs. Elle doit permettre de sauvegarder et charger les utilisateurs et les groupes Ã  partir d'un fichier XML. 
+ * La structure du fichier XML devra Ãªtre la mÃªme que celle du fichier userDB.xml.
  * @see <a href="../../userDB.xml">userDB.xml</a> 
  * 
- * @author Jose Mennesson (Mettre à jour)
- * @version 04/2016 (Mettre à jour)
+ * @author Jose Mennesson (Mettre Ã  jour)
+ * @version 04/2016 (Mettre Ã  jour)
  * 
  */
 
-//TODO Classe à modifier
+//TODO Classe Ã  modifier
 
 public class UserDB {
 
 	/**
 	 * 
-	 * Le fichier contenant la base de données.
+	 * Le fichier contenant la base de donnÃ©es.
 	 * 
 	 */
 	private String file;
@@ -45,13 +45,13 @@ public class UserDB {
 	 * 
 	 * Constructeur de UserDB. 
 	 * 
-	 * !!!!!!!!!!!! PENSEZ À AJOUTER UN ADMINISTRATEUR (su par exemple) QUI VOUS PERMETTRA DE CHARGER LA BASE DE DONNÉES AU DEMARRAGE DE L'APPLICATION !!!!!!
+	 * !!!!!!!!!!!! PENSEZ Ã€ AJOUTER UN ADMINISTRATEUR (su par exemple) QUI VOUS PERMETTRA DE CHARGER LA BASE DE DONNÃ‰ES AU DEMARRAGE DE L'APPLICATION !!!!!!
 	 * 
 	 * @param file
-	 * 		Le nom du fichier qui contient la base de données.
+	 * 		Le nom du fichier qui contient la base de donnÃ©es.
 	 */
 	public UserDB(String file){
-		//TODO Fonction à modifier
+		//TODO Fonction Ã  modifier
 		super();
 		this.setFile(file);
 	}
@@ -60,7 +60,7 @@ public class UserDB {
 	 * Getter de file
 	 * 
 	 * @return 
-	 * 		Le nom du fichier qui contient la base de données.
+	 * 		Le nom du fichier qui contient la base de donnÃ©es.
 	 */
 
 	public String getFile() {
@@ -71,7 +71,7 @@ public class UserDB {
 	 * Setter de file
 	 * 
 	 * @param file
-	 * 		Le nom du fichier qui contient la base de données.
+	 * 		Le nom du fichier qui contient la base de donnÃ©es.
 	 */
 
 	public void setFile(String file) {
@@ -86,7 +86,7 @@ public class UserDB {
 		return groupes;
 	}
 
-	public void loadDB(){
+	public boolean loadDB(){
 		org.jdom2.Document document = null ;
 		
 		Element rootElt;
@@ -99,7 +99,6 @@ public class UserDB {
 		if(document!=null){
 			rootElt = document.getRootElement();
 			
-			//On r�cup�re les Groups
 			Element groupsDB = rootElt.getChild("Groups");
 			List<Element> groupsElmts = groupsDB.getChildren("Group");
 			Iterator<Element> itGroup = groupsElmts.iterator();
@@ -112,7 +111,6 @@ public class UserDB {
 				groupes.put(groupId, new Groupe(groupId));
 			}
 
-			//On r�cup�re les Students
 			Element studentsDB = rootElt.getChild("Students");
 			List<Element> studentsElmts = studentsDB.getChildren("Student");
 			Iterator<Element> itStudent = studentsElmts.iterator();
@@ -122,11 +120,11 @@ public class UserDB {
 
 				String login = unStudentElmt.getChild("login").getText();
 				Etudiant student = new Etudiant(login, unStudentElmt.getChild("pwd").getText(), unStudentElmt.getChild("surname").getText(), unStudentElmt.getChild("firstname").getText(), Integer.parseInt(unStudentElmt.getChild("studentId").getText()));
+				student.setIdGroupe(Integer.parseInt(unStudentElmt.getChild("groupId").getText()));
 
 				utilisateurs.put(login, student);
 			}
 
-			//On r�cup�re les Teachers
 			Element teachersDB = rootElt.getChild("Teachers");
 			List<Element> teachersElmts = teachersDB.getChildren("Teacher");
 			Iterator<Element> itTeacher = teachersElmts.iterator();
@@ -140,7 +138,6 @@ public class UserDB {
 				utilisateurs.put(login, teacher);
 			}
 
-			//On r�cup�re les Administrators
 			Element administratorsDB = rootElt.getChild("Students");
 			List<Element> administratorsElmts = administratorsDB.getChildren("Administrator");
 			Iterator<Element> itAdministrator = administratorsElmts.iterator();
@@ -154,5 +151,26 @@ public class UserDB {
 				utilisateurs.put(login, administrator);
 			}
 		}
+		
+		return true;
+	}
+	
+	public boolean saveDB(){
+		Element rootElmt = new Element("UsersDB");
+		org.jdom2.Document document = new Document(rootElmt);
+		
+		Element groupsElmts = new Element("Groups");
+		rootElmt.setContent(groupsElmts);
+		
+		Element studentsElmts = new Element("Students");
+		rootElmt.setContent(studentsElmts);
+		
+		Element teachersElmts = new Element("Teachers");
+		rootElmt.setContent(teachersElmts);
+		
+		Element administratorsElmts = new Element("Administrators");
+		rootElmt.setContent(administratorsElmts);
+	
+		return true;
 	}
 }
