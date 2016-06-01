@@ -237,10 +237,14 @@ public class UserDB {
 
 			unUserId.setText(Integer.toString(valeur.getId()));
 			unUser.addContent(unUserId);
-
-			return true;
 		}		
 
-		return true;
+		try{
+			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+			sortie.output(document, new FileOutputStream("userDB.xml"));
+			return true ;
+		}catch (java.io.IOException e){
+			return false ;
+		}
 	}
 }
