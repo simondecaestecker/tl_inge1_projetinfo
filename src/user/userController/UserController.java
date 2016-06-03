@@ -80,7 +80,7 @@ public class UserController implements IUserController
 	@Override
 	public boolean addAdmin(String adminLogin, String newAdminlogin, int adminID, String firstname, String surname, String pwd) {
 		if (userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur) {
-			if (!userDB.getListeUtilisateur().containsKey(newAdminlogin)) {
+			if (!userDB.getListeUtilisateur().containsKey(newAdminlogin) && adminID <= 999) {
 				userDB.getListeUtilisateur().put(newAdminlogin, ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newAdminlogin, pwd, surname, firstname, adminID, 0));
 				return saveDB();
 			}
@@ -94,7 +94,7 @@ public class UserController implements IUserController
 	public boolean addTeacher(String adminLogin, String newteacherLogin, int teacherID, String firstname,
 			String surname, String pwd) {
 		if (userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur) {
-			if (!userDB.getListeUtilisateur().containsKey(newteacherLogin)) {
+			if (!userDB.getListeUtilisateur().containsKey(newteacherLogin) && teacherID > 1000 && teacherID <= 1999) {
 				userDB.getListeUtilisateur().put(newteacherLogin, ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newteacherLogin, pwd, surname, firstname, teacherID, 1));
 				return saveDB();
 			}
@@ -108,7 +108,7 @@ public class UserController implements IUserController
 	public boolean addStudent(String adminLogin, String newStudentLogin, int studentID, String firstname,
 			String surname, String pwd) {
 		if (userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur) {
-			if (!userDB.getListeUtilisateur().containsKey(newStudentLogin)) {
+			if (!userDB.getListeUtilisateur().containsKey(newStudentLogin) && studentID > 2000 && studentID <= 2999) {
 				userDB.getListeUtilisateur().put(newStudentLogin, ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newStudentLogin, pwd, surname, firstname, studentID, 2));
 				return saveDB();
 			}
