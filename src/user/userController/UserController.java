@@ -174,19 +174,23 @@ public class UserController implements IUserController
 
 	@Override
 	public String[] usersToString() {
-		String[] users = new String[userDB.getListeGroupe().size()];
+		String[] users = new String[userDB.getListeUtilisateur().size()];
 		int i = 0;
+
 		for(Entry<String, Utilisateur> entry : userDB.getListeUtilisateur().entrySet()){
-			users[i]="Rôle : "+entry.getValue().getClassUser()+"\n";
-			users[i]="Id : "+entry.getValue().getId()+"\n";
-			users[i]="Login : "+entry.getValue().getLogin()+"\n";
-			users[i]="Password : "+entry.getValue().getPassword()+"\n";
-			users[i]="Prénom Nom : "+entry.getValue().getName()+"\n";
+			users[i] = "Rôle : " + entry.getValue().getClassUser();
+			users[i] += " - Id : " + entry.getValue().getId();
+			users[i] += " - Login : " + entry.getValue().getLogin();
+			users[i] += " - Password : " + entry.getValue().getPassword();
+			users[i] += " - Prénom Nom : " + entry.getValue().getName();
+			
 			if(entry.getValue() instanceof Etudiant){
-				users[i]="Groupe : "+((Etudiant) entry.getValue()).getIdGroupe()+"\n";
+				users[i] += " - Groupe : " + ((Etudiant) entry.getValue()).getIdGroupe();
 			}
+			
 			i++;
 		}
+		
 		return users;
 	}
 
