@@ -127,21 +127,21 @@ public class UserController implements IUserController
 
 	@Override
 	public boolean removeUser(String adminLogin, String userLogin) {
-		if(userDB.getListeUtilisateur().containsKey(adminLogin) && userDB.getListeUtilisateur().containsKey(userLogin)){
-			if(userDB.getListeUtilisateur().get(userLogin) instanceof Etudiant){
+		if (userDB.getListeUtilisateur().containsKey(adminLogin) && userDB.getListeUtilisateur().containsKey(userLogin)){
+			if ((userDB.getListeUtilisateur().get(userLogin) instanceof Etudiant) && ((Etudiant) userDB.getListeUtilisateur().get(userLogin)).getIdGroupe() > 0){
 				userDB.getListeGroupe().get(((Etudiant)userDB.getListeUtilisateur().get(userLogin)).getIdGroupe()).removeEtudiant((Etudiant)userDB.getListeUtilisateur().get(userLogin));
 			}
 			userDB.getListeUtilisateur().remove(userLogin);
 			return true;
 		}
-		else{
+		else {
 			return false;
 		}
 	}
 
 	@Override
 	public boolean addGroup(String adminLogin, int groupId) {
-		if(userDB.getListeUtilisateur().containsKey(adminLogin) && (userDB.getListeGroupe().containsKey(groupId)==false)){
+		if(groupId > 0 && userDB.getListeUtilisateur().containsKey(adminLogin) && (userDB.getListeGroupe().containsKey(groupId)==false)){
 			userDB.getListeGroupe().put(groupId, ((Administrateur) (userDB.getListeUtilisateur().get(adminLogin))).createGroup(groupId));
 			return true;
 		}
@@ -200,7 +200,7 @@ public class UserController implements IUserController
 		String[] usersLogin = new String[userDB.getListeUtilisateur().size()];
 		int i = 0;
 		for(Entry<String, Utilisateur> entry : userDB.getListeUtilisateur().entrySet()){
-			usersLogin[i]=entry.getValue().getLogin();
+			usersLogin[i] = entry.getValue().getLogin();
 			i++;
 		}
 		return usersLogin;
