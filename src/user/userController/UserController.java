@@ -82,7 +82,7 @@ public class UserController implements IUserController
 		if (userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur) {
 			if (!userDB.getListeUtilisateur().containsKey(newAdminlogin)) {
 				userDB.getListeUtilisateur().put(newAdminlogin, ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newAdminlogin, pwd, surname, firstname, adminID, 0));
-				return true;
+				return saveDB();
 			}
 			return false;
 		}
@@ -96,7 +96,7 @@ public class UserController implements IUserController
 		if (userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur) {
 			if (!userDB.getListeUtilisateur().containsKey(newteacherLogin)) {
 				userDB.getListeUtilisateur().put(newteacherLogin, ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newteacherLogin, pwd, surname, firstname, teacherID, 1));
-				return true;
+				return saveDB();
 			}
 			return false;
 		}
@@ -110,7 +110,7 @@ public class UserController implements IUserController
 		if (userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur) {
 			if (!userDB.getListeUtilisateur().containsKey(newStudentLogin)) {
 				userDB.getListeUtilisateur().put(newStudentLogin, ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newStudentLogin, pwd, surname, firstname, studentID, 2));
-				return true;
+				return saveDB();
 			}
 			return false;
 		}
@@ -125,7 +125,7 @@ public class UserController implements IUserController
 				userDB.getListeGroupe().get(((Etudiant)userDB.getListeUtilisateur().get(userLogin)).getIdGroupe()).removeEtudiant((Etudiant)userDB.getListeUtilisateur().get(userLogin));
 			}
 			userDB.getListeUtilisateur().remove(userLogin);
-			return true;
+			return saveDB();
 		}
 		else {
 			return false;
@@ -136,7 +136,7 @@ public class UserController implements IUserController
 	public boolean addGroup(String adminLogin, int groupId) {
 		if(groupId > 0 && userDB.getListeUtilisateur().containsKey(adminLogin) && (userDB.getListeGroupe().containsKey(groupId)==false)){
 			userDB.getListeGroupe().put(groupId, ((Administrateur) (userDB.getListeUtilisateur().get(adminLogin))).createGroup(groupId));
-			return true;
+			return saveDB();
 		}
 		else{
 			return false;
@@ -148,7 +148,7 @@ public class UserController implements IUserController
 		if(userDB.getListeUtilisateur().containsKey(adminLogin) && userDB.getListeGroupe().containsKey(groupId)){
 			userDB.getListeGroupe().get(groupId).removeAllEtudiant();
 			userDB.getListeGroupe().remove(groupId);
-			return true;
+			return saveDB();
 		}
 		else{
 			return false;
@@ -159,7 +159,7 @@ public class UserController implements IUserController
 	public boolean associateStudToGroup(String adminLogin, String studentLogin, int groupId) {
 		if(userDB.getListeUtilisateur().containsKey(adminLogin) && userDB.getListeUtilisateur().containsKey(studentLogin) && userDB.getListeGroupe().containsKey(groupId)){
 			((Etudiant) (userDB.getListeUtilisateur().get(studentLogin))).setIdGroupe(groupId);
-			return true;
+			return saveDB();
 		}
 		else{
 			return false;
