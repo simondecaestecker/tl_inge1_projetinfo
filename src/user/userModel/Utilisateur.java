@@ -44,10 +44,10 @@ public class Utilisateur {
 		if(id <= 999){
 			return "Administrator";
 		}
-		else if(id<=1999){
+		else if(id > 1000 && id <= 1999){
 			return "Teacher";
 		}
-		else if(id<=2999){
+		else if(id > 2000 && id <= 2999){
 			return "Student";
 		}
 		else{
