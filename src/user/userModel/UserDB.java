@@ -122,7 +122,12 @@ public class UserDB {
 			while(itStudent.hasNext()){
 				Element unStudentElmt = (Element)itStudent.next();
 				
-				utilisateurs.put(unStudentElmt.getChild("login").getText(), root.createUser(unStudentElmt.getChild("login").getText(), unStudentElmt.getChild("pwd").getText(), unStudentElmt.getChild("surname").getText(), unStudentElmt.getChild("firstname").getText(), Integer.parseInt(unStudentElmt.getChild("studentId").getText()), 2));
+				Etudiant etudiant = (Etudiant) root.createUser(unStudentElmt.getChild("login").getText(), unStudentElmt.getChild("pwd").getText(), unStudentElmt.getChild("surname").getText(), unStudentElmt.getChild("firstname").getText(), Integer.parseInt(unStudentElmt.getChild("studentId").getText()), 2);
+				
+				utilisateurs.put(unStudentElmt.getChild("login").getText(), etudiant);
+				if (Integer.parseInt(unStudentElmt.getChild("groupId").getText()) > 0) {
+					groupes.get(Integer.parseInt(unStudentElmt.getChild("groupId").getText())).addEtudiant(etudiant);
+				}				
 			}
 
 			Element teachersDB = rootElt.getChild("Teachers");
