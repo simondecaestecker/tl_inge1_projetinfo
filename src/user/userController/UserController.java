@@ -156,9 +156,17 @@ public class UserController implements IUserController
 	}
 
 	@Override
-	public boolean associateStudToGroup(String adminLogin, String studentLogin, int groupId) {
-		if(userDB.getListeUtilisateur().containsKey(adminLogin) && userDB.getListeUtilisateur().containsKey(studentLogin) && userDB.getListeGroupe().containsKey(groupId)){
-			((Etudiant) (userDB.getListeUtilisateur().get(studentLogin))).setIdGroupe(groupId);
+	public boolean associateStudToGroup(String adminLogin, String studentLogin, int groupId) {		
+		if ((userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur) && userDB.getListeUtilisateur().containsKey(studentLogin) && userDB.getListeGroupe().containsKey(groupId)) {
+			Etudiant etudiant = ((Etudiant) (userDB.getListeUtilisateur().get(studentLogin)));
+			
+			if (etudiant.getIdGroupe() > 0) {
+				userDB.getListeGroupe().get(etudiant.getIdGroupe()).removeEtudiant(etudiant);				
+			}
+			
+			etudiant.setIdGroupe(groupId);
+			userDB.getListeGroupe().get(groupId).addEtudiant(etudiant);
+			
 			return saveDB();
 		}
 		else{
