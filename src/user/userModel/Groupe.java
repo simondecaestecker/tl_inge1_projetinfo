@@ -1,16 +1,16 @@
 package userModel;
-import java.util.HashMap;
-import java.util.Map.Entry;
+import java.util.HashSet;
 
 public class Groupe {
 
 	private int id;
 	private int nombre;
-	private HashMap<Integer, Etudiant> groupe;
+	private HashSet<String> groupe;
 	
 	public Groupe(int id){
 		this.id = id;	
 		this.nombre = 0;
+		this.groupe = new HashSet<String>();
 	}
 	
 	public int getId(){
@@ -30,24 +30,22 @@ public class Groupe {
 	}
 	
 	public void addEtudiant(Etudiant etudiant){
-		groupe.put(etudiant.getId(), etudiant);
+		groupe.add(etudiant.getLogin());
 		etudiant.setIdGroupe(id);
 		nombre++;
 	}
 	
 	public void removeEtudiant(Etudiant etudiant){
-		groupe.remove(etudiant.getId());
-		etudiant.setIdGroupe(0);
+		groupe.remove(etudiant.getLogin());
+		etudiant.setIdGroupe(-1);
 		nombre--;
 	}
 	
 	public void removeAllEtudiant(){
-		for(Entry<Integer, Etudiant> entry : groupe.entrySet()){
-			removeEtudiant(entry.getValue());
-		}
+		groupe.clear();
 	}
 	
-	public HashMap<Integer, Etudiant> getEtudiantGroupe(){
+	public HashSet<String> getEtudiantsGroupe(){
 		return groupe;
 	}
 }
