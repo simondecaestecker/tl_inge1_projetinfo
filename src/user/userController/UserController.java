@@ -1,5 +1,6 @@
 package userController;
 
+import java.util.Iterator;
 import java.util.Map.Entry;
 
 import userModel.Groupe;
@@ -232,15 +233,33 @@ public class UserController implements IUserController
 	@Override
 	public String[] groupsToString() {
 		String[] groups = new String[userDB.getListeGroupe().size()];
+
 		int i = 0;
 		for(Entry<Integer, Groupe> entry : userDB.getListeGroupe().entrySet()){
-			groups[i]="Id : "+entry.getValue().getId()+"\n";
-			groups[i]="Nombre : "+entry.getValue().getNombre()+"\n";
-			for(Entry<Integer, Etudiant> entryStudent : entry.getValue().getEtudiantGroupe().entrySet()){
+			groups[i] = "Id : " + entry.getValue().getId();
+			groups[i] += " - Nombre d'étudiants : " + entry.getValue().getNombre();
+			
+			if (entry.getValue().getNombre() > 0) {
+				groups[i] += " - Etudiants : ";
 				
+				Iterator<String> iterator = entry.getValue().getEtudiantsGroupe().iterator(); 
+				
+				int j = 0;
+				while (iterator.hasNext()) {
+					
+					Etudiant etudiant = (Etudiant) userDB.getListeUtilisateur().get(iterator.next());
+					groups[i] += etudiant.getName() + " (" + etudiant.getLogin() + ")";
+					
+					if (j < entry.getValue().getEtudiantsGroupe().size() - 1) {
+						groups[i] += ", ";
+					}
+				}
+				j++;
 			}
+
 			i++;
 		}
+		
 		return groups;
 	}
 
