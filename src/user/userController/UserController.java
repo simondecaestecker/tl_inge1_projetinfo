@@ -79,50 +79,43 @@ public class UserController implements IUserController
 
 	@Override
 	public boolean addAdmin(String adminLogin, String newAdminlogin, int adminID, String firstname, String surname, String pwd) {
-		if(userDB.getListeUtilisateur().containsKey(adminLogin)){
-			return false;
-		}
-		else{
-			if(userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur){
+		if (userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur) {
+			if (!userDB.getListeUtilisateur().containsKey(newAdminlogin)) {
 				userDB.getListeUtilisateur().put(newAdminlogin, ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newAdminlogin, pwd, surname, firstname, adminID, 0));
 				return true;
 			}
-			else{
-				return false;
-			}
+			return false;
 		}
+		
+		return false;
 	}
 
 	@Override
 	public boolean addTeacher(String adminLogin, String newteacherLogin, int teacherID, String firstname,
 			String surname, String pwd) {
-		if(userDB.getListeUtilisateur().containsKey(adminLogin)){
-			return false;
-		}
-		else{
-			if(userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur){
-				userDB.getListeUtilisateur().put(newteacherLogin, ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newteacherLogin, pwd, surname, firstname, teacherID, 0));
+		if (userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur) {
+			if (!userDB.getListeUtilisateur().containsKey(newteacherLogin)) {
+				userDB.getListeUtilisateur().put(newteacherLogin, ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newteacherLogin, pwd, surname, firstname, teacherID, 1));
 				return true;
 			}
-			else{
-				return false;
-			}
+			return false;
 		}
+		
+		return false;
 	}
 
 	@Override
 	public boolean addStudent(String adminLogin, String newStudentLogin, int studentID, String firstname,
 			String surname, String pwd) {
-		if(userDB.getListeUtilisateur().containsKey(adminLogin)){
-			return false;
-		}
-		else{
-			if(userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur){
-				userDB.getListeUtilisateur().put(newStudentLogin,((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newStudentLogin, pwd, surname, firstname, studentID, 0));
+		if (userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur) {
+			if (!userDB.getListeUtilisateur().containsKey(newStudentLogin)) {
+				userDB.getListeUtilisateur().put(newStudentLogin, ((Administrateur)(userDB.getListeUtilisateur().get(adminLogin))).createUser(newStudentLogin, pwd, surname, firstname, studentID, 2));
 				return true;
 			}
 			return false;
 		}
+		
+		return false;
 	}
 
 	@Override
