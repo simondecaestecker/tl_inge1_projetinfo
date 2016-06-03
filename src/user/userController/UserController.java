@@ -7,7 +7,6 @@ import userModel.Groupe;
 import userModel.UserDB;
 import userModel.Etudiant;
 import userModel.Administrateur;
-import userModel.Professeur;
 import userModel.Utilisateur;
 /**
  * Cette classe est le contrôleur d'utilisateurs que vous devez implémenter. 

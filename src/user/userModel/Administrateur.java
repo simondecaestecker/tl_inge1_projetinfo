@@ -24,8 +24,4 @@ public class Administrateur extends Utilisateur {
 		Groupe groupe = new Groupe(id);
 		return groupe;
 	}
-	
-	private boolean addUserGroup() {
-		return false;
-	}
 }
