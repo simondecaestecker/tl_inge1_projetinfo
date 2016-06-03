@@ -52,6 +52,9 @@ public class UserDB {
 		//TODO Fonction Ã  modifier
 		super();
 		
+		this.utilisateurs = new HashMap<String, Utilisateur>();
+		this.groupes = new HashMap<Integer, Groupe>();
+		
 		this.root = new Administrateur("root", "root", "root", "root", 0);
 		
 		loadDB();
@@ -108,7 +111,7 @@ public class UserDB {
 
 			while(itGroup.hasNext()){
 				Element unGroupElmt = (Element)itGroup.next();
-
+				
 				groupes.put(Integer.parseInt(unGroupElmt.getChild("groupId").getText()), root.createGroup(Integer.parseInt(unGroupElmt.getChild("groupId").getText())));
 			}
 
@@ -132,14 +135,14 @@ public class UserDB {
 				utilisateurs.put(unTeacherElmt.getChild("login").getText(), root.createUser(unTeacherElmt.getChild("login").getText(), unTeacherElmt.getChild("pwd").getText(), unTeacherElmt.getChild("surname").getText(), unTeacherElmt.getChild("firstname").getText(), Integer.parseInt(unTeacherElmt.getChild("teacherId").getText()), 1));
 			}
 
-			Element administratorsDB = rootElt.getChild("Students");
+			Element administratorsDB = rootElt.getChild("Administrators");
 			List<Element> administratorsElmts = administratorsDB.getChildren("Administrator");
 			Iterator<Element> itAdministrator = administratorsElmts.iterator();
 
 			while(itAdministrator.hasNext()){
 				Element unAdministratorElmt = (Element)itAdministrator.next();
-
-				utilisateurs.put(unAdministratorElmt.getChild("login").getText(), root.createUser(unAdministratorElmt.getChild("login").getText(), unAdministratorElmt.getChild("pwd").getText(), unAdministratorElmt.getChild("surname").getText(), unAdministratorElmt.getChild("firstname").getText(), Integer.parseInt(unAdministratorElmt.getChild("administratorId").getText()), 0));
+			
+				utilisateurs.put(unAdministratorElmt.getChild("login").getText(), root.createUser(unAdministratorElmt.getChild("login").getText(), unAdministratorElmt.getChild("pwd").getText(), unAdministratorElmt.getChild("surname").getText(), unAdministratorElmt.getChild("firstname").getText(), Integer.parseInt(unAdministratorElmt.getChild("adminId").getText()), 0));
 			}
 		}
 
