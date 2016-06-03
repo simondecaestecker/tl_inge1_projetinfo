@@ -159,23 +159,23 @@ public class UserDB {
 		org.jdom2.Document document = new Document(rootElmt);
 
 		Element groupsElmts = new Element("Groups");
-		rootElmt.setContent(groupsElmts);
+		rootElmt.addContent(groupsElmts);
 
 		Element studentsElmts = new Element("Students");
-		rootElmt.setContent(studentsElmts);
+		rootElmt.addContent(studentsElmts);
 
 		Element teachersElmts = new Element("Teachers");
-		rootElmt.setContent(teachersElmts);
+		rootElmt.addContent(teachersElmts);
 
 		Element administratorsElmts = new Element("Administrators");
-		rootElmt.setContent(administratorsElmts);
+		rootElmt.addContent(administratorsElmts);
 
 		//Save les Groups
 		for (Entry<Integer, Groupe> entry : groupes.entrySet()) {
 			Groupe valeur = entry.getValue();
 
 			Element unGroup = new Element("Group");
-			groupsElmts.setContent(unGroup);
+			groupsElmts.addContent(unGroup);
 
 			Element unGroupId = new Element("groupId");
 			unGroup.addContent(unGroupId);
@@ -207,7 +207,7 @@ public class UserDB {
 			Element unUserId;
 
 			if (valeur.getClassUser() == "Student") {
-				studentsElmts.setContent(unUser);
+				studentsElmts.addContent(unUser);
 
 				unUserId = new Element("studentId");
 
@@ -217,13 +217,13 @@ public class UserDB {
 			}
 
 			else if (valeur.getClassUser() == "Teacher") {
-				teachersElmts.setContent(unUser);
+				teachersElmts.addContent(unUser);
 
 				unUserId = new Element("teacherId");
 			}
 
 			else if (valeur.getClassUser() == "Administrator") {
-				administratorsElmts.setContent(unUser);
+				administratorsElmts.addContent(unUser);
 
 				unUserId = new Element("adminId");
 			}
@@ -234,7 +234,7 @@ public class UserDB {
 
 			unUserId.setText(Integer.toString(valeur.getId()));
 			unUser.addContent(unUserId);
-		}		
+		}
 
 		try{
 			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
