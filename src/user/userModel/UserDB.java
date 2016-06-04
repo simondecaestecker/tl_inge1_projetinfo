@@ -36,7 +36,7 @@ public class UserDB {
 
 	private HashMap<String, Utilisateur> utilisateurs;
 	private HashMap<Integer, Groupe> groupes;
-	
+
 	private Administrateur root;
 
 	/**
@@ -51,15 +51,15 @@ public class UserDB {
 	public UserDB(String file){
 		//TODO Fonction Ã  modifier
 		super();
-		
+
 		this.utilisateurs = new HashMap<String, Utilisateur>();
 		this.groupes = new HashMap<Integer, Groupe>();
-		
+
 		this.root = new Administrateur("root", "root", "root", "root", 0);
-		
-		loadDB();
-		
+
 		this.setFile(file);
+
+		loadDB();		
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class UserDB {
 		SAXBuilder sxb = new SAXBuilder();
 
 		try{
-			document = sxb.build(new File("userDB.xml"));
+			document = sxb.build(new File(getFile()));
 		}catch(Exception e){}
 
 		if(document!=null){
@@ -111,7 +111,7 @@ public class UserDB {
 
 			while(itGroup.hasNext()){
 				Element unGroupElmt = (Element)itGroup.next();
-				
+
 				groupes.put(Integer.parseInt(unGroupElmt.getChild("groupId").getText()), root.createGroup(Integer.parseInt(unGroupElmt.getChild("groupId").getText())));
 			}
 
@@ -121,9 +121,9 @@ public class UserDB {
 
 			while(itStudent.hasNext()){
 				Element unStudentElmt = (Element)itStudent.next();
-				
+
 				Etudiant etudiant = (Etudiant) root.createUser(unStudentElmt.getChild("login").getText(), unStudentElmt.getChild("pwd").getText(), unStudentElmt.getChild("surname").getText(), unStudentElmt.getChild("firstname").getText(), Integer.parseInt(unStudentElmt.getChild("studentId").getText()), 2);
-				
+
 				utilisateurs.put(unStudentElmt.getChild("login").getText(), etudiant);
 				if (Integer.parseInt(unStudentElmt.getChild("groupId").getText()) > 0) {
 					groupes.get(Integer.parseInt(unStudentElmt.getChild("groupId").getText())).addEtudiant(etudiant);
@@ -146,7 +146,7 @@ public class UserDB {
 
 			while(itAdministrator.hasNext()){
 				Element unAdministratorElmt = (Element)itAdministrator.next();
-			
+
 				utilisateurs.put(unAdministratorElmt.getChild("login").getText(), root.createUser(unAdministratorElmt.getChild("login").getText(), unAdministratorElmt.getChild("pwd").getText(), unAdministratorElmt.getChild("surname").getText(), unAdministratorElmt.getChild("firstname").getText(), Integer.parseInt(unAdministratorElmt.getChild("adminId").getText()), 0));
 			}
 		}
@@ -238,7 +238,7 @@ public class UserDB {
 
 		try{
 			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-			sortie.output(document, new FileOutputStream("userDB.xml"));
+			sortie.output(document, new FileOutputStream(getFile()));
 			return true ;
 		}catch (java.io.IOException e){
 			return false ;
