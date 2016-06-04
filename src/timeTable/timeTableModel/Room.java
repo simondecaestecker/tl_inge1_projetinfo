@@ -3,88 +3,75 @@
  *******************************************************************************/
 package timeTableModel;
 
-import java.util.HashSet;
-
-
 /**
- * Description of Room.
+ * Classe représentant une salle dans le projet
  * 
- * @author aleroysouque
+ * @author Antoine Leroy-Souque
+ * @version 06/2016
+ * 
  */
+
 public class Room {
+	/**
+	 * Capacité maximale de la salle (int)
+	 */
+	private int capacity ;
 	
 	/**
-	 * Attributs
+	 * Identifiant de la salle (int)
 	 */
-	private Object capacity ;
-	private Object RoomId ;
-	public HashSet<Booking> bookings = new HashSet<Booking>();
-
+	private int roomId ;
 
 	/**
-	 * Constructeur
+	 * Constructeur de Room créant une salle
+	 * 
+	 * @param roomId
+	 * 		Identifiant de la salle (int)
+	 * 
+	 * @param capacity
+	 * 		Capacité maximale de la salle (int)
 	 */
-	public Room() {
-		super();
+	public Room(int roomId , int capacity) {
+		this.capacity = capacity ;
+		this.roomId = roomId ;
 	}
-
+	
 	/**
-	 * Méthodes
-	 */
-	public void addRoom() {
-		// Start of user code for method addRoom
-		// End of user code
-	}
-
-	/**
-	 * Description of the method removeRoom.
-	 */
-	public void removeRoom() {
-		// Start of user code for method removeRoom
-		// End of user code
-	}
-
-	// Start of user code (user defined methods for Room)
-
-	// End of user code
-	/**
-	 * Returns capacity.
+	 * Getter de l'attribut capacity.
+	 * 
 	 * @return capacity 
 	 */
-	public Object getCapacity() {
+	public int getCapacity() {
 		return this.capacity;
 	}
 
 	/**
-	 * Sets a value to attribute capacity. 
-	 * @param newCapacity 
+	 * Setter de l'attribut capacity. 
+	 * 
+	 * @param newCapacity
+	 * 		capacité de la nouvelle salle 
 	 */
-	public void setCapacity(Object newCapacity) {
+	public void setCapacity(int newCapacity) {
 		this.capacity = newCapacity;
 	}
 
 	/**
-	 * Returns RoomId.
-	 * @return RoomId 
+	 * Getter de l'attribut roomId.
+	 * 
+	 * @return roomId 
 	 */
-	public Object getRoomId() {
-		return this.RoomId;
+	public int getRoomId() {
+		return this.roomId;
 	}
 
 	/**
-	 * Sets a value to attribute RoomId. 
-	 * @param newRoomId 
+	 * Setter de l'attribut roomId.
+	 * 
+	 * @param newRoomId
+	 * 		identifiant de la nouvelle salle
 	 */
-	public void setRoomId(Object newRoomId) {
-		this.RoomId = newRoomId;
-	}
-
-	/**
-	 * Returns bookings.
-	 * @return bookings 
-	 */
-	public HashSet<Booking> getBookings() {
-		return this.bookings;
+	public void setRoomId(int newRoomId) {
+		this.roomId = newRoomId;
 	}
 
 }

@@ -1,109 +1,166 @@
 /*******************************************************************************
  * 2016, All rights reserved.
  *******************************************************************************/
-package timeTableModel;
 
+/**
+ * Modèle d'emploi du temps pour le projet
+ */
+package timeTableModel;
 import java.util.Date;
 
 /**
- * Description of Booking.
+ * Classe représentant une réservation dans le projet
  * 
- * @author aleroysouque
+ * @author Antoine Leroy-Souque
+ * @version 06/2016
+ * 
  */
+
 public class Booking {
 	/**
-	 * Attributs
+	 * Identifiant de réservation (int)
 	 */
 	private int bookId ;
-	private int loginProf ;
+	
+	/**
+	 * Identifiant du professeur (String)
+	 */
+	private String loginProf ;
+	
+	/**
+	 * Date de début de la réservation (Date)
+	 */
 	private Date dateBegin ;
+	
+	/**
+	 * Date de fin de la réservation (Date)
+	 */
 	private Date dateEnd ;	
+	
+	/**
+	 * Identifiant de la salle à réserver (int)
+	 */
+	private int roomId ;
 
 	/**
-	 * Constructeur
+	 * Constructeur de Booking créant une réservation
+	 * 
+	 * @param dateBegin
+	 * 		Date de début de la réservation (Date)
+	 * 
+	 * @param dateEnd
+	 * 		Date de fin de la réservation (Date)
+	 * 
+	 * @param loginProf
+	 * 		Login du professeur qui effectue la réservation (String)
+	 * 
+	 * @param roomId
+	 * 		Identifiant de la salle à réserver (int)
+	 * 
+	 * @param bookId
+	 * 		Identifiant de la réservation (int)
 	 */
-	public Booking() {
-		super();
+	public Booking(Date dateBegin, Date dateEnd, String loginProf, int roomId, int bookId){
+		this.bookId = bookId ;
+		this.dateBegin = dateBegin ;
+		this.dateEnd = dateEnd ;
+		this.loginProf = loginProf ;
+		this.roomId = roomId ;
 	}
 
 	/**
-	 * Méthodes
-	 */
-	public void BookTimeSlot() {
-		// Start of user code for method BookTimeSlot
-		// End of user code
-	}
-
-	/**
-	 * Description of the method UnbookTimeSlot.
-	 */
-	public void UnbookTimeSlot() {
-		// Start of user code for method UnbookTimeSlot
-		// End of user code
-	}
-
-	/**
-	 * Returns bookId.
+	 * Getter de l'attribut bookId.
+	 * 
 	 * @return bookId 
 	 */
-	public Object getBookId() {
+	public int getBookId(){
 		return this.bookId;
 	}
 
 	/**
-	 * Sets a value to attribute bookId. 
-	 * @param newBookId 
+	 * Setter de l'attribut bookId.
+	 *  
+	 * @param newBookId
+	 * 		identifiant de la nouvelle réservation
 	 */
-	public void setBookId(int newBookId) {
+	public void setBookId(int newBookId){
 		this.bookId = newBookId ;
 	}
 
 	/**
-	 * Returns loginProf.
+	 * Getter de l'attribut loginProf.
+	 * 
 	 * @return loginProf 
 	 */
-	public Object getLoginProf() {
+	public String getLoginProf(){
 		return this.loginProf;
 	}
 
 	/**
-	 * Sets a value to attribute loginProf. 
-	 * @param newLoginProf 
+	 * Setter de l'attribut loginProf. 
+	 * 
+	 * @param newLoginProf
+	 * 		identifiant du login du professeur 
 	 */
-	public void setLoginProf(int newLoginProf) {
+	public void setLoginProf(String newLoginProf){
 		this.loginProf = newLoginProf;
 	}
 
 	/**
-	 * Returns dateBegin.
+	 * Getter de l'attribut dateBegin.
+	 * 
 	 * @return dateBegin 
 	 */
-	public Object getDateBegin() {
+	public Date getDateBegin(){
 		return this.dateBegin;
 	}
 
 	/**
-	 * Sets a value to attribute dateBegin. 
-	 * @param newDateBegin 
+	 * Setter de l'attribut dateBegin.
+	 *  
+	 * @param newDateBegin
+	 * 		nouvelle date de début de la réservation
 	 */
-	public void setDateBegin(Date newDateBegin) {
+	public void setDateBegin(Date newDateBegin){
 		this.dateBegin = newDateBegin;
 	}
 
 	/**
-	 * Returns dateEnd.
+	 * Getter de l'attribut dateEnd.
+	 * 
 	 * @return dateEnd 
 	 */
-	public Object getDateEnd() {
+	public Date getDateEnd(){
 		return this.dateEnd;
 	}
 
 	/**
-	 * Sets a value to attribute dateEnd. 
+	 * Setter de l'attribut dateEnd. 
+	 * 
 	 * @param newDateEnd 
+	 * 		nouvelle date de fin de la réservation
 	 */
-	public void setDateEnd(Date newDateEnd) {
+	public void setDateEnd(Date newDateEnd){
 		this.dateEnd = newDateEnd;
+	}
+	
+	/**
+	 * Getter de l'attribut roomId.
+	 * 
+	 * @return roomId 
+	 */
+	public int getroomId(){
+		return this.roomId;
+	}
+
+	/**
+	 * Seter de l'attribut roomId..
+	 *  
+	 * @param newRoomId
+	 * 		identifiant de la nouvelle salle
+	 */
+	public void setroomId(int newRoomId){
+		this.bookId = newRoomId ;
 	}
 
 }
