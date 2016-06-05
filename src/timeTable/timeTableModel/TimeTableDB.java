@@ -406,7 +406,7 @@ public class TimeTableDB {
 	 * @return "true" si la réservation s'est bien effectuée, "false" sinon
 	 */
 	public boolean addBooking(int timeTableId, int bookingId, String login, Date dateBegin, Date dateEnd, int roomId){
-		if(timetables.containsKey(timeTableId) && rooms.containsKey(roomId)){
+		if(timetables.containsKey(timeTableId) && rooms.containsKey(roomId) && timeTableId > 0){
 			if(timetables.get(timeTableId).getBookings().size() > 0){
 				for(Entry<Integer, Booking> entry : timetables.get(timeTableId).getBookings().entrySet()) {
 					Booking valeur = entry.getValue();
