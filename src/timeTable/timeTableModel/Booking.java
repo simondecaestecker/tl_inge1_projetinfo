@@ -154,7 +154,7 @@ public class Booking {
 	}
 
 	/**
-	 * Seter de l'attribut roomId..
+	 * Seter de l'attribut roomId.
 	 *  
 	 * @param newRoomId
 	 * 		identifiant de la nouvelle salle
