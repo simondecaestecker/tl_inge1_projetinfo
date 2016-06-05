@@ -4,7 +4,7 @@
 package timeTableModel;
 
 /**
- * Classe représentant une salle dans le projet
+ * Classe reprÃ©sentant une salle dans le projet
  * 
  * @author Antoine Leroy-Souque
  * @version 06/2016
@@ -13,7 +13,7 @@ package timeTableModel;
 
 public class Room {
 	/**
-	 * Capacité maximale de la salle (int)
+	 * CapacitÃ© maximale de la salle (int)
 	 */
 	private int capacity ;
 	
@@ -23,13 +23,13 @@ public class Room {
 	private int roomId ;
 
 	/**
-	 * Constructeur de Room créant une salle
+	 * Constructeur de Room crÃ©ant une salle
 	 * 
 	 * @param roomId
 	 * 		Identifiant de la salle (int)
 	 * 
 	 * @param capacity
-	 * 		Capacité maximale de la salle (int)
+	 * 		CapacitÃ© maximale de la salle (int)
 	 */
 	public Room(int roomId , int capacity) {
 		this.capacity = capacity ;
@@ -49,7 +49,7 @@ public class Room {
 	 * Setter de l'attribut capacity. 
 	 * 
 	 * @param newCapacity
-	 * 		capacité de la nouvelle salle 
+	 * 		capacitÃ© de la nouvelle salle 
 	 */
 	public void setCapacity(int newCapacity) {
 		this.capacity = newCapacity;

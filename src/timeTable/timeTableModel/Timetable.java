@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 /**
- * Classe représentant un emploi du temps dans le projet
+ * Classe reprÃ©sentant un emploi du temps dans le projet
  * 
  * @author Antoine Leroy-Souque
  * @version 06/2016
@@ -20,12 +20,12 @@ public class Timetable {
 	private int timeTableId;
 	
 	/**
-	 * Contient des instances de réservations associées respectivement à un identifiant entier
+	 * Contient des instances de rÃ©servations associÃ©es respectivement Ã  un identifiant entier
 	 */
 	private HashMap<Integer, Booking> bookings ;
 	
 	/**
-	 * Constructeur d'emploi du temps créant la base de données de réservations
+	 * Constructeur d'emploi du temps crÃ©ant la base de donnÃ©es de rÃ©servations
 	 * 
 	 * @param timeTableId
 	 * 		Identifiant (int) de l'emploi du temps
@@ -37,24 +37,24 @@ public class Timetable {
 	}
 	
 	/**
-     * Réserve un créneau dans l'emploi du temps
+     * RÃ©serve un crÃ©neau dans l'emploi du temps
      * 
-     * @return booléen "true"
+     * @return boolÃ©en "true"
      * 
 	 * @param BeginDate
-	 * 		Date de début de la réservation
+	 * 		Date de dÃ©but de la rÃ©servation
 	 * 
 	 * @param EndDate
-	 * 		Date de fin de la réservation
+	 * 		Date de fin de la rÃ©servation
 	 * 
 	 * @param Proflogin
-	 * 		Chaîne de caractères correspondant à l'identifiant du professeur
+	 * 		ChaÃ®ne de caractÃ¨res correspondant Ã  l'identifiant du professeur
 	 * 
 	 * @param RoomId
 	 * 		Nombre entier donnant l'identifiant de la salle
 	 * 
 	 * @param BookId
-	 * 		Nombre entier donnant l'identifiant de la réservation
+	 * 		Nombre entier donnant l'identifiant de la rÃ©servation
 	 */
 	public boolean BookTimeSlot(Date BeginDate, Date EndDate, String Proflogin, int RoomId, int BookId){
 			Booking Book = new Booking(BeginDate, EndDate, Proflogin, RoomId, BookId) ;
@@ -63,12 +63,12 @@ public class Timetable {
 	}
 
 	/**
-     * Supprime un créneau précédemment réservé dans l'emploi du temps
+     * Supprime un crÃ©neau prÃ©cÃ©demment rÃ©servÃ© dans l'emploi du temps
      * 
-     * @return booléen "true" si la réservation a bien été supprimée, "false" sinon
+     * @return boolÃ©en "true" si la rÃ©servation a bien Ã©tÃ© supprimÃ©e, "false" sinon
      * 
 	 * @param bookId
-	 * 		Nombre entier correspondant au numéro de la réservation qu'on désire supprimer
+	 * 		Nombre entier correspondant au numÃ©ro de la rÃ©servation qu'on dÃ©sire supprimer
 	 * 
 	 */
 	public boolean UnbookTimeSlot(int bookId){
@@ -99,7 +99,7 @@ public class Timetable {
 	}
 
 	/**
-	 * Getter de l'attribut de base de données de réservations
+	 * Getter de l'attribut de base de donnÃ©es de rÃ©servations
 	 * 
 	 * @return bookings 
 	 */

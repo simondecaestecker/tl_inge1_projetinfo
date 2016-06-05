@@ -11,8 +11,8 @@ import timeTableModel.TimeTableDB;
 import timeTableModel.Timetable;
 
 /**
- * Cette classe est le contrôleur d'emplois du temps.
- * Elle contient un attribut correspondant à la base de données d'emplois (TimeTableDB).
+ * Cette classe est le contrÃ´leur d'emplois du temps.
+ * Elle contient un attribut correspondant Ã  la base de donnÃ©es d'emplois (TimeTableDB).
  * Elle contient toutes les fonctions de l'interface ITimeTableController.
  * 
  * @author Antoine Leroy-Souque
@@ -22,16 +22,16 @@ import timeTableModel.Timetable;
 
 public class TimeTableController implements ITimeTableController{
 	/**
-	 * Contient une instance de base de données d'emplois du temps
+	 * Contient une instance de base de donnÃ©es d'emplois du temps
 	 * 
 	 */
 	TimeTableDB tTDB;
 	
 	/**
-	 * Constructeur de contrôleur d'emplois du temps créant la base de données d'emplois du temps
+	 * Constructeur de contrÃ´leur d'emplois du temps crÃ©ant la base de donnÃ©es d'emplois du temps
 	 * 
 	 * @param tTfile
-	 * 		Fichier XML contenant la base de données d'emplois du temps
+	 * 		Fichier XML contenant la base de donnÃ©es d'emplois du temps
 	 */
 	public TimeTableController(String tTfile) {
 		TimeTableDB tTDB=new TimeTableDB(tTfile);
@@ -39,13 +39,13 @@ public class TimeTableController implements ITimeTableController{
 	}
 
 	/**
-	 * Getter du login du professeur correspondant à l'identifiant d'une réservation contenue dans un emploi du temps identifié
+	 * Getter du login du professeur correspondant Ã  l'identifiant d'une rÃ©servation contenue dans un emploi du temps identifiÃ©
 	 * 
 	 * @param timeTableId
 	 * 		identifiant de l'emploi du temps
 	 * 
 	 * @param bookId
-	 * 		identifiant de la réservation
+	 * 		identifiant de la rÃ©servation
 	 * 
 	 * @return l'identifiant du professeur correspondant, "erreur" sinon
 	 */
@@ -59,9 +59,9 @@ public class TimeTableController implements ITimeTableController{
 	}
 
 	/**
-	 * Donne les identifiants des salles dans un tableau de caractères
+	 * Donne les identifiants des salles dans un tableau de caractÃ¨res
 	 * 
-	 * @return tableau de caractères contenant les identifiants de toutes les salles de la base de données
+	 * @return tableau de caractÃ¨res contenant les identifiants de toutes les salles de la base de donnÃ©es
 	 */
 	@Override
 	public String[] roomsIdToString() {
@@ -80,9 +80,9 @@ public class TimeTableController implements ITimeTableController{
 	}
 
 	/**
-	 * Donne les informations sur les salles de la base de données (identifiant + capacité) dans un tableau de caractères
+	 * Donne les informations sur les salles de la base de donnÃ©es (identifiant + capacitÃ©) dans un tableau de caractÃ¨res
 	 * 
-	 * @return tableau de caractères contenant les informations sur toutes les salles de la base de données
+	 * @return tableau de caractÃ¨res contenant les informations sur toutes les salles de la base de donnÃ©es
 	 */
 	@Override
 	public String[] roomsToString() {
@@ -92,7 +92,7 @@ public class TimeTableController implements ITimeTableController{
 		for(Entry<Integer, Room> entry : tTDB.getrooms().entrySet()) {
 			Room valeur = entry.getValue();
 			
-			rooms[i] = "Room " + Integer.toString(valeur.getRoomId()) + " | capacité de " + Integer.toString(valeur.getCapacity()) + " personnes";
+			rooms[i] = "Room " + Integer.toString(valeur.getRoomId()) + " | capacitÃ© de " + Integer.toString(valeur.getCapacity()) + " personnes";
 			i++ ;
 		}
 		
@@ -100,9 +100,9 @@ public class TimeTableController implements ITimeTableController{
 	}
 
 	/**
-	 * Donne les identifiants des emplois du temps de la base de données dans un tableau de caractères
+	 * Donne les identifiants des emplois du temps de la base de donnÃ©es dans un tableau de caractÃ¨res
 	 * 
-	 * @return tableau de caractères contenant les identifiants de tous les emplois du temps de la base de données
+	 * @return tableau de caractÃ¨res contenant les identifiants de tous les emplois du temps de la base de donnÃ©es
 	 */
 	@Override
 	public String[] timeTablesIDToString(){
@@ -119,12 +119,12 @@ public class TimeTableController implements ITimeTableController{
 	}
 
 	/**
-	 * Donne les identifiants de toutes les réservations d'un emploi du temps donné
+	 * Donne les identifiants de toutes les rÃ©servations d'un emploi du temps donnÃ©
 	 * 
 	 * @param timeTableId
-	 * 		identifiant de l'emploi du temps dont on veut récupérer les réservations
+	 * 		identifiant de l'emploi du temps dont on veut rÃ©cupÃ©rer les rÃ©servations
 	 * 
-	 * @return tableau de caractères contenant les identifiants de toutes les réservations d'un emploi du temps
+	 * @return tableau de caractÃ¨res contenant les identifiants de toutes les rÃ©servations d'un emploi du temps
 	 */
 	@Override
 	public String[] booksIdToString(int timeTableId){
@@ -143,15 +143,15 @@ public class TimeTableController implements ITimeTableController{
 	}
 
 	/**
-	 * Ajoute une salle dans la base de données
+	 * Ajoute une salle dans la base de donnÃ©es
 	 * 
 	 * @param roomId
-	 * 		identifiant de la nouvelle salle à ajouter
+	 * 		identifiant de la nouvelle salle Ã  ajouter
 	 * 
 	 * @param capacity
-	 * 		capacité maximale de la salle à ajouter
+	 * 		capacitÃ© maximale de la salle Ã  ajouter
 	 * 
-	 * @return "true" si la salle a été ajoutée à la base de données, "false" sinon
+	 * @return "true" si la salle a Ã©tÃ© ajoutÃ©e Ã  la base de donnÃ©es, "false" sinon
 	 */
 	@Override
 	public boolean addRoom(int roomId, int capacity) {
@@ -164,12 +164,12 @@ public class TimeTableController implements ITimeTableController{
 	}
 
 	/**
-	 * Supprime une salle de la base de données
+	 * Supprime une salle de la base de donnÃ©es
 	 * 
 	 * @param roomId
-	 * 		identifiant de la salle à supprimer
+	 * 		identifiant de la salle Ã  supprimer
 	 * 
-	 * @return "true" si la salle a bien été supprimée, "false" sinon
+	 * @return "true" si la salle a bien Ã©tÃ© supprimÃ©e, "false" sinon
 	 */
 	@Override
 	public boolean removeRoom(int roomId) {
@@ -182,13 +182,13 @@ public class TimeTableController implements ITimeTableController{
 	}
 
 	/**
-	 * Getter de l'identifiant de la salle d'une réservation précise d'un emploi du temps donné
+	 * Getter de l'identifiant de la salle d'une rÃ©servation prÃ©cise d'un emploi du temps donnÃ©
 	 * 
 	 * @param timeTableId
 	 * 		identifiant de l'emploi du temps
 	 * 
 	 * @param bookId
-	 * 		identifiant de la réservation
+	 * 		identifiant de la rÃ©servation
 	 * 
 	 * @return l'identifiant de la salle correspondante (int), -1 sinon
 	 */
@@ -208,9 +208,9 @@ public class TimeTableController implements ITimeTableController{
 	 * Ajoute un emploi du temps
 	 * 
 	 * @param timeTableId
-	 * 		identifiant de l'emploi du temps à créer
+	 * 		identifiant de l'emploi du temps Ã  crÃ©er
 	 * 
-	 * @return "true" si l'emploi du temps a bien été créé, "false" sinon
+	 * @return "true" si l'emploi du temps a bien Ã©tÃ© crÃ©Ã©, "false" sinon
 	 */
 	@Override
 	public boolean addTimeTable(int timeTableId) {
@@ -225,9 +225,9 @@ public class TimeTableController implements ITimeTableController{
 	 * Supprime un emploi du temps
 	 * 
 	 * @param timeTableId
-	 * 		identifiant de l'emploi du temps à supprimer
+	 * 		identifiant de l'emploi du temps Ã  supprimer
 	 * 
-	 * @return "true" si l'emploi du temps a bien été supprimé, "false" sinon
+	 * @return "true" si l'emploi du temps a bien Ã©tÃ© supprimÃ©, "false" sinon
 	 */
 	@Override
 	public boolean removeTimeTable(int timeTableId) {
@@ -239,27 +239,27 @@ public class TimeTableController implements ITimeTableController{
 	}
 
 	/**
-	 * Ajoute une réservation dans un emploi du temps
+	 * Ajoute une rÃ©servation dans un emploi du temps
 	 * 
 	 * @param timeTableId 
-	 * 		identifiant de l'emploi du temps dans lequel on veut ajouter une réservation
+	 * 		identifiant de l'emploi du temps dans lequel on veut ajouter une rÃ©servation
 	 * 
 	 * @param bookingId
-	 * 		identifiant de la nouvelle réservation
+	 * 		identifiant de la nouvelle rÃ©servation
 	 * 
 	 * @param login
-	 * 		login du professeur qui effectue la réservation
+	 * 		login du professeur qui effectue la rÃ©servation
 	 * 
 	 * @param dateBegin
-	 * 		Date de début de la nouvelle réservation
+	 * 		Date de dÃ©but de la nouvelle rÃ©servation
 	 * 
 	 * @param dateEnd
-	 * 		Date de fin de la nouvelle réservation
+	 * 		Date de fin de la nouvelle rÃ©servation
 	 * 
 	 * @param roomId
-	 * 		identifiant de la salle à réserver
+	 * 		identifiant de la salle Ã  rÃ©server
 	 * 
-	 * @return "true" si la réservation a bien été effectuée, "false" sinon
+	 * @return "true" si la rÃ©servation a bien Ã©tÃ© effectuÃ©e, "false" sinon
 	 */
 	@Override
 	public boolean addBooking(int timeTableId, int bookingId, String login, Date dateBegin, Date dateEnd, int roomId) {
@@ -273,16 +273,16 @@ public class TimeTableController implements ITimeTableController{
 	}
 
 	/**
-	 * Récupère les dates de début et de fin de toutes les réservations d'un emploi du temps
+	 * RÃ©cupÃ¨re les dates de dÃ©but et de fin de toutes les rÃ©servations d'un emploi du temps
 	 * 
 	 * @param timeTableId
-	 * 		identifiant de l'emploi du temps dont on veut récupérer les dates
+	 * 		identifiant de l'emploi du temps dont on veut rÃ©cupÃ©rer les dates
 	 * 
 	 * @param dateBegin
-	 * 		Hashtable contenant toutes les dates de début des réservations
+	 * 		Hashtable contenant toutes les dates de dÃ©but des rÃ©servations
 	 * 
 	 * @param dateEnd
-	 * 		Hashtable contenant toutes les dates de fin des réservations
+	 * 		Hashtable contenant toutes les dates de fin des rÃ©servations
 	 */
 	@Override
 	public void getBookingsDate(int timeTableId, Hashtable<Integer, Date> dateBegin, Hashtable<Integer, Date> dateEnd) {
@@ -301,15 +301,15 @@ public class TimeTableController implements ITimeTableController{
 	}
 
 	/**
-	 * Supprime une réservation dans un emploi du temps donné
+	 * Supprime une rÃ©servation dans un emploi du temps donnÃ©
 	 * 
 	 * @param timeTableId
-	 * 		identifiant de l'emploi du temps dont on veut supprimer la réservation
+	 * 		identifiant de l'emploi du temps dont on veut supprimer la rÃ©servation
 	 * 
 	 * @param bookId
-	 * 		identifiant de la réservation à supprimer
+	 * 		identifiant de la rÃ©servation Ã  supprimer
 	 * 
-	 * @return "true" si la réservation a bien été supprimée, "false" sinon
+	 * @return "true" si la rÃ©servation a bien Ã©tÃ© supprimÃ©e, "false" sinon
 	 */
 	@Override
 	public boolean removeBook(int timeTableId, int bookId) {
@@ -323,12 +323,12 @@ public class TimeTableController implements ITimeTableController{
 	}
 
 	/**
-	 * Donne l'identifiant max des réservations d'un emploi du temps
+	 * Donne l'identifiant max des rÃ©servations d'un emploi du temps
 	 * 
 	 * @param timeTableId
 	 * 		identifiant de l'emploi du temps
 	 * 
-	 * @return l'identifiant (int) max des réservations de cet emploi du temps
+	 * @return l'identifiant (int) max des rÃ©servations de cet emploi du temps
 	 */
 	@Override
 	public int getBookingsMaxId(int timeTableId) {
@@ -349,9 +349,9 @@ public class TimeTableController implements ITimeTableController{
 	}
 
 	/**
-	 * Sauvegarde la base de données d'emploi du temps et de salles
+	 * Sauvegarde la base de donnÃ©es d'emploi du temps et de salles
 	 * 
-	 * @return "true" si la sauvegarde s'est correctement déroulée, "false" sinon
+	 * @return "true" si la sauvegarde s'est correctement dÃ©roulÃ©e, "false" sinon
 	 */
 	@Override
 	public boolean saveDB() {
@@ -359,9 +359,9 @@ public class TimeTableController implements ITimeTableController{
 	}
 
 	/**
-	 * Charge la base de données d'emploi du temps et de salles
+	 * Charge la base de donnÃ©es d'emploi du temps et de salles
 	 * 
-	 * @return "true" si le chargement s'est correctement déroulé, "false" sinon
+	 * @return "true" si le chargement s'est correctement dÃ©roulÃ©, "false" sinon
 	 */
 	@Override
 	public boolean loadDB() {

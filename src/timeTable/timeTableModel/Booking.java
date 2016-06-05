@@ -3,13 +3,13 @@
  *******************************************************************************/
 
 /**
- * Modèle d'emploi du temps pour le projet
+ * ModÃ¨le d'emploi du temps pour le projet
  */
 package timeTableModel;
 import java.util.Date;
 
 /**
- * Classe représentant une réservation dans le projet
+ * Classe reprÃ©sentant une rÃ©servation dans le projet
  * 
  * @author Antoine Leroy-Souque
  * @version 06/2016
@@ -18,7 +18,7 @@ import java.util.Date;
 
 public class Booking {
 	/**
-	 * Identifiant de réservation (int)
+	 * Identifiant de rÃ©servation (int)
 	 */
 	private int bookId ;
 	
@@ -28,37 +28,37 @@ public class Booking {
 	private String loginProf ;
 	
 	/**
-	 * Date de début de la réservation (Date)
+	 * Date de dÃ©but de la rÃ©servation (Date)
 	 */
 	private Date dateBegin ;
 	
 	/**
-	 * Date de fin de la réservation (Date)
+	 * Date de fin de la rÃ©servation (Date)
 	 */
 	private Date dateEnd ;	
 	
 	/**
-	 * Identifiant de la salle à réserver (int)
+	 * Identifiant de la salle Ã  rÃ©server (int)
 	 */
 	private int roomId ;
 
 	/**
-	 * Constructeur de Booking créant une réservation
+	 * Constructeur de Booking crÃ©ant une rÃ©servation
 	 * 
 	 * @param dateBegin
-	 * 		Date de début de la réservation (Date)
+	 * 		Date de dÃ©but de la rÃ©servation (Date)
 	 * 
 	 * @param dateEnd
-	 * 		Date de fin de la réservation (Date)
+	 * 		Date de fin de la rÃ©servation (Date)
 	 * 
 	 * @param loginProf
-	 * 		Login du professeur qui effectue la réservation (String)
+	 * 		Login du professeur qui effectue la rÃ©servation (String)
 	 * 
 	 * @param roomId
-	 * 		Identifiant de la salle à réserver (int)
+	 * 		Identifiant de la salle Ã  rÃ©server (int)
 	 * 
 	 * @param bookId
-	 * 		Identifiant de la réservation (int)
+	 * 		Identifiant de la rÃ©servation (int)
 	 */
 	public Booking(Date dateBegin, Date dateEnd, String loginProf, int roomId, int bookId){
 		this.bookId = bookId ;
@@ -81,7 +81,7 @@ public class Booking {
 	 * Setter de l'attribut bookId.
 	 *  
 	 * @param newBookId
-	 * 		identifiant de la nouvelle réservation
+	 * 		identifiant de la nouvelle rÃ©servation
 	 */
 	public void setBookId(int newBookId){
 		this.bookId = newBookId ;
@@ -119,7 +119,7 @@ public class Booking {
 	 * Setter de l'attribut dateBegin.
 	 *  
 	 * @param newDateBegin
-	 * 		nouvelle date de début de la réservation
+	 * 		nouvelle date de dÃ©but de la rÃ©servation
 	 */
 	public void setDateBegin(Date newDateBegin){
 		this.dateBegin = newDateBegin;
@@ -138,7 +138,7 @@ public class Booking {
 	 * Setter de l'attribut dateEnd. 
 	 * 
 	 * @param newDateEnd 
-	 * 		nouvelle date de fin de la réservation
+	 * 		nouvelle date de fin de la rÃ©servation
 	 */
 	public void setDateEnd(Date newDateEnd){
 		this.dateEnd = newDateEnd;

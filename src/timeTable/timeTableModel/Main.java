@@ -11,8 +11,8 @@ import java.util.HashMap;
 import timeTableController.TimeTableController;*/
 
 /**
- * Cette classe permet de tester les fonctions du contrôleur d'emplois du temps.
- * Elle crée une base de données de 3 salles et de 4 réservations d'emplois du temps et les sauvegarde dans le fichier "timeTableDB.xml". 
+ * Cette classe permet de tester les fonctions du contrÃ´leur d'emplois du temps.
+ * Elle crÃ©e une base de donnÃ©es de 3 salles et de 4 rÃ©servations d'emplois du temps et les sauvegarde dans le fichier "timeTableDB.xml". 
  * 
  * @author Antoine Leroy-Souque
  * @version 06/2016
@@ -24,7 +24,7 @@ public class Main {
 	 * Fonction principale 
 	 * 
 	 * @param args
-	 * 			Les arguments donnés en entrée du programme.
+	 * 			Les arguments donnÃ©s en entrÃ©e du programme.
 	 * 
 	 */
 	public static void main(String[] args) {

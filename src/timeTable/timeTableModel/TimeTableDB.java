@@ -20,8 +20,8 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 /**
- * Cette classe gère la base de données d'emplois du temps. Elle doit permettre de sauvegarder et charger les emplois du temps ainsi que les salles à partir d'un fichier XML. 
- * La structure du fichier XML devra être la même que celle du fichier TimeTableDB.xml.
+ * Cette classe gÃ¨re la base de donnÃ©es d'emplois du temps. Elle doit permettre de sauvegarder et charger les emplois du temps ainsi que les salles Ã  partir d'un fichier XML. 
+ * La structure du fichier XML devra Ãªtre la mÃªme que celle du fichier TimeTableDB.xml.
  * @see <a href="../../TimeTableDB.xml">TimeTableDB.xml</a> 
  * 
  * @author Antoine Leroy-Souque
@@ -46,15 +46,15 @@ public class TimeTableDB {
 	private Timetable timetableprof ;
 	
 	/**
-	 * Le fichier contenant la base de données.
+	 * Le fichier contenant la base de donnÃ©es.
 	 */
 	private String file;
 	
 	/**
-	 * Constructeur de la base de données d'emploi du temps créant les emplois du temps et les salles.
+	 * Constructeur de la base de donnÃ©es d'emploi du temps crÃ©ant les emplois du temps et les salles.
 	 * 
 	 * @param file
-	 * 		Le nom du fichier qui contient la base de données.
+	 * 		Le nom du fichier qui contient la base de donnÃ©es.
 	 */
 	public TimeTableDB(String file){
 		timetables = new HashMap<Integer, Timetable>();
@@ -68,7 +68,7 @@ public class TimeTableDB {
 	 * Getter de file
 	 * 
 	 * @return 
-	 * 		Le nom du fichier qui contient la base de données.
+	 * 		Le nom du fichier qui contient la base de donnÃ©es.
 	 */
 	public String getFile() {
 		return file ;
@@ -78,16 +78,16 @@ public class TimeTableDB {
 	 * Setter de file
 	 * 
 	 * @param file
-	 * 		Le nom du fichier qui contient la base de données.
+	 * 		Le nom du fichier qui contient la base de donnÃ©es.
 	 */
 	public void setFile(String file) {
 		this.file = file;
 	}
 	
 	/**
-	 * Charge la base de données d'emplois du temps à partir du fichier XML.
+	 * Charge la base de donnÃ©es d'emplois du temps Ã  partir du fichier XML.
 	 * 
-	 * @return "true" si le chargement s'est correctement effectué, "false" sinon
+	 * @return "true" si le chargement s'est correctement effectuÃ©, "false" sinon
 	 */
 	public boolean loadDB(){
 		DateFormat fd = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -102,12 +102,12 @@ public class TimeTableDB {
 		if(document!=null){
 			rootElt = document.getRootElement();
 			
-			//On récupère les Rooms
+			//On rÃ©cupÃ¨re les Rooms
 			Element roomsDB = rootElt.getChild("Rooms");
 			List<Element> roomsElmts = roomsDB.getChildren("Room");
 			Iterator<Element> itRoom = roomsElmts.iterator();
 			
-			//On récupère les Timetables
+			//On rÃ©cupÃ¨re les Timetables
 			Element timetablesDB = rootElt.getChild("TimeTables");
 			List<Element> timetablesElmts = timetablesDB.getChildren("TimeTable");
 			Iterator<Element> itTimetable = timetablesElmts.iterator();
@@ -115,10 +115,10 @@ public class TimeTableDB {
 			while(itRoom.hasNext()){
 				Element uneRoomElt = (Element)itRoom.next();
 				
-				//récupérer RoomId et le convertir en int
+				//rÃ©cupÃ©rer RoomId et le convertir en int
 				int roomId = Integer.parseInt(uneRoomElt.getChild("RoomId").getText());
 				
-				//récupérer Capacity et le convertir en int
+				//rÃ©cupÃ©rer Capacity et le convertir en int
 				int capacity = Integer.parseInt(uneRoomElt.getChild("Capacity").getText());
 				
 				//Mettre RoomId et Capacity dans l'HashMap rooms
@@ -129,11 +129,11 @@ public class TimeTableDB {
 			while(itTimetable.hasNext()){
 				Element unTimetableElt = (Element)itTimetable.next();
 				
-				//récupérer GroupId et le convertir en int
+				//rÃ©cupÃ©rer GroupId et le convertir en int
 				int GroupId = Integer.parseInt(unTimetableElt.getChild("GroupId").getText());
 				Timetable TimetableTemp = new Timetable(GroupId);
 				
-				//récupérer les Books
+				//rÃ©cupÃ©rer les Books
 				Element booksDB = unTimetableElt.getChild("Books");
 				List<Element> booksElmts = booksDB.getChildren("Book");
 				Iterator<Element> itBook = booksElmts.iterator();
@@ -141,16 +141,16 @@ public class TimeTableDB {
 				while(itBook.hasNext()){
 					Element unBookElt = (Element)itBook.next();
 					
-					//récupérer BookingId et le convertir en int
+					//rÃ©cupÃ©rer BookingId et le convertir en int
 					int BookingId = Integer.parseInt(unBookElt.getChild("BookingId").getText());
 					
-					//récupérer Login
+					//rÃ©cupÃ©rer Login
 					String Login = unBookElt.getChild("Login").getText();
 					
-					//récupérer RoomId
+					//rÃ©cupÃ©rer RoomId
 					int RoomId = Integer.parseInt(unBookElt.getChild("RoomId").getText());
 
-					//récupérer DateBegin
+					//rÃ©cupÃ©rer DateBegin
 					Date DateBegin = null ;
 					try {
 						DateBegin = fd.parse(unBookElt.getChild("DateBegin").getText());
@@ -159,7 +159,7 @@ public class TimeTableDB {
 						e1.printStackTrace();
 					}
 
-					//récupérer DateEnd
+					//rÃ©cupÃ©rer DateEnd
 					Date DateEnd = null ;
 					try {
 						DateEnd = fd.parse(unBookElt.getChild("DateEnd").getText());
@@ -168,7 +168,7 @@ public class TimeTableDB {
 						e.printStackTrace();
 					}
 
-					//Mettre les valeurs récupérées dans l'HashMap bookings
+					//Mettre les valeurs rÃ©cupÃ©rÃ©es dans l'HashMap bookings
 					TimetableTemp.BookTimeSlot(DateBegin, DateEnd, Login, RoomId, BookingId);
 					
 					//Tester le login prof
@@ -189,9 +189,9 @@ public class TimeTableDB {
 	}
 	
 	/**
-	 * Sauvegarde la base de données d'emplois du temps dans un fichier XML
+	 * Sauvegarde la base de donnÃ©es d'emplois du temps dans un fichier XML
 	 * 
-	 * @return "true" si la sauvegarde s'est correctement effectuée, "false" sinon
+	 * @return "true" si la sauvegarde s'est correctement effectuÃ©e, "false" sinon
 	 */
 	@SuppressWarnings("unused")
 	public boolean saveDB(){
@@ -264,7 +264,7 @@ public class TimeTableDB {
 			TimeTablesElt.addContent(unTimetable);			
 		}
 		
-		//Lier à TimeTablesDB
+		//Lier Ã  TimeTablesDB
 		rootElt.addContent(RoomsElt);
 		rootElt.addContent(TimeTablesElt);
 		
@@ -306,12 +306,12 @@ public class TimeTableDB {
 	}
 	
 	/**
-	 * Ajoute un nouvel emploi du temps dans timetables s'il n'existe pas déjà
+	 * Ajoute un nouvel emploi du temps dans timetables s'il n'existe pas dÃ©jÃ 
 	 * 
 	 * @param TimetableId
-	 * 		identifiant de l'emploi du temps à ajouter
+	 * 		identifiant de l'emploi du temps Ã  ajouter
 	 * 
-	 * @return "true" si l'ajout s'est bien effectué, "false" sinon
+	 * @return "true" si l'ajout s'est bien effectuÃ©, "false" sinon
 	 */
 	public boolean addTimetable(int TimetableId){
 		if(this.timetables.containsKey(TimetableId)){
@@ -326,12 +326,12 @@ public class TimeTableDB {
 	}
 
 	/**
-	 * Supprime un emploi du temps correspondant à l'identifiant donné si celui-ci existe
+	 * Supprime un emploi du temps correspondant Ã  l'identifiant donnÃ© si celui-ci existe
 	 * 
 	 * @param TimetableId
-	 * 		identifiant de l'emploi du temps à supprimer
+	 * 		identifiant de l'emploi du temps Ã  supprimer
 	 * 
-	 * @return "true" si la suppression s'est bien effectuée, "false" sinon
+	 * @return "true" si la suppression s'est bien effectuÃ©e, "false" sinon
 	 */
 	public boolean removeTimetable(int TimetableId){
 		if(this.timetables.containsKey(TimetableId)){
@@ -343,15 +343,15 @@ public class TimeTableDB {
 	}
 
 	/**
-	 * Ajoute une salle dans rooms si elle n'existe pas déjà
+	 * Ajoute une salle dans rooms si elle n'existe pas dÃ©jÃ 
 	 * 
 	 * @param roomId
-	 * 		identifiant de la salle à ajouter
+	 * 		identifiant de la salle Ã  ajouter
 	 * 
 	 * @param capacity
-	 * 		capacité maximale de la salle à ajouter
+	 * 		capacitÃ© maximale de la salle Ã  ajouter
 	 * 
-	 * @return "true" si l'ajout s'est bien effectué, "false" sinon
+	 * @return "true" si l'ajout s'est bien effectuÃ©, "false" sinon
 	 */
 	public boolean addRoom(int roomId, int capacity){
 		if(this.rooms.containsKey(roomId)){
@@ -369,9 +369,9 @@ public class TimeTableDB {
 	 * Supprime une salle dans rooms si elle existe
 	 * 
 	 * @param roomId
-	 * 		identifiant de la salle à supprimer
+	 * 		identifiant de la salle Ã  supprimer
 	 * 
-	 * @return "true" si la suppression s'est bien effectuée, "false" sinon
+	 * @return "true" si la suppression s'est bien effectuÃ©e, "false" sinon
 	 */
 	public boolean removeRoom(int roomId){
 		if(this.rooms.containsKey(roomId)){
@@ -383,27 +383,27 @@ public class TimeTableDB {
 	}
 
 	/**
-	 * Ajoute une réservation dans timetables s'il n'y a pas de conflit avec une précédente réservation
+	 * Ajoute une rÃ©servation dans timetables s'il n'y a pas de conflit avec une prÃ©cÃ©dente rÃ©servation
 	 * 
 	 * @param timeTableId
-	 * 		identifiant de l'emploi du temps dans lequel on veut ajouter une réservation
+	 * 		identifiant de l'emploi du temps dans lequel on veut ajouter une rÃ©servation
 	 * 
 	 * @param bookingId
-	 * 		identifiant de la nouvelle réservation
+	 * 		identifiant de la nouvelle rÃ©servation
 	 * 
 	 * @param login
-	 * 		login du prof qui effectue la réservation
+	 * 		login du prof qui effectue la rÃ©servation
 	 * 
 	 * @param dateBegin
-	 * 		Date de début de la réservation
+	 * 		Date de dÃ©but de la rÃ©servation
 	 * 
 	 * @param dateEnd
-	 * 		Date de fin de la réservation
+	 * 		Date de fin de la rÃ©servation
 	 * 
 	 * @param roomId
-	 * 		identifiant de la salle à réserver
+	 * 		identifiant de la salle Ã  rÃ©server
 	 * 
-	 * @return "true" si la réservation s'est bien effectuée, "false" sinon
+	 * @return "true" si la rÃ©servation s'est bien effectuÃ©e, "false" sinon
 	 */
 	public boolean addBooking(int timeTableId, int bookingId, String login, Date dateBegin, Date dateEnd, int roomId){
 		if(timetables.containsKey(timeTableId) && rooms.containsKey(roomId) && timeTableId > 0){
@@ -412,7 +412,7 @@ public class TimeTableDB {
 					Booking valeur = entry.getValue();
 					
 					if(dateBegin.before(valeur.getDateBegin())){
-						if(dateEnd.after(valeur.getDateBegin())){ //ici ça regroupe les deux cas : date début avant date début existante et date fin compris entre ou après la date fin de l'existant
+						if(dateEnd.after(valeur.getDateBegin())){ //ici Ã§a regroupe les deux cas : date dÃ©but avant date dÃ©but existante et date fin compris entre ou aprÃ¨s la date fin de l'existant
 							return false ;
 						}
 					}
