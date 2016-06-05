@@ -13,43 +13,42 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 /**
- * 
- * Cette classe gÃ©re la base de donnÃ©es d'utilisateurs. Elle doit permettre de sauvegarder et charger les utilisateurs et les groupes Ã  partir d'un fichier XML. 
- * La structure du fichier XML devra Ãªtre la mÃªme que celle du fichier userDB.xml.
+ * Cette classe gère la base de données d'utilisateurs. Elle doit permet de sauvegarder et charger les utilisateurs et les groupes à partir d'un fichier XML. 
+ * La structure du fichier XML doit être la même que celle du fichier userDB.xml.
  * @see <a href="../../userDB.xml">userDB.xml</a> 
  * 
- * @author Jose Mennesson (Mettre Ã  jour)
- * @version 04/2016 (Mettre Ã  jour)
- * 
+ * @author Simon Decaestecker et Arthur Louchart
+ * @version 06/2016
  */
-
-//TODO Classe Ã  modifier
-
 public class UserDB {
 
 	/**
-	 * 
-	 * Le fichier contenant la base de donnÃ©es.
-	 * 
+	 * Le fichier contenant la base de données
 	 */
 	private String file;
 
+	/**
+	 * HashMap contenant le login de l'utilisateur ainsi que l'utilisateur lui-même
+	 */
 	private HashMap<String, Utilisateur> utilisateurs;
+
+	/**
+	 * HashMap contenant l'ID du groupe ainsi que le groupe lui-même
+	 */
 	private HashMap<Integer, Groupe> groupes;
 
+	/**
+	 * Administrateur permettant le chargement de la base de données au démarrage du programme
+	 */
 	private Administrateur root;
 
 	/**
-	 * 
-	 * Constructeur de UserDB. 
-	 * 
-	 * !!!!!!!!!!!! PENSEZ Ã€ AJOUTER UN ADMINISTRATEUR (su par exemple) QUI VOUS PERMETTRA DE CHARGER LA BASE DE DONNÃ‰ES AU DEMARRAGE DE L'APPLICATION !!!!!!
-	 * 
+	 * Constructeur de UserDB
+	 *  
 	 * @param file
-	 * 		Le nom du fichier qui contient la base de donnÃ©es.
+	 * 		Le nom du fichier qui contient la base de données
 	 */
 	public UserDB(String file){
-		//TODO Fonction Ã  modifier
 		super();
 
 		this.utilisateurs = new HashMap<String, Utilisateur>();
@@ -66,9 +65,8 @@ public class UserDB {
 	 * Getter de file
 	 * 
 	 * @return 
-	 * 		Le nom du fichier qui contient la base de donnÃ©es.
+	 * 		Le nom du fichier qui contient la base de données
 	 */
-
 	public String getFile() {
 		return file;
 	}
@@ -77,21 +75,35 @@ public class UserDB {
 	 * Setter de file
 	 * 
 	 * @param file
-	 * 		Le nom du fichier qui contient la base de donnÃ©es.
+	 * 		Le nom du fichier qui contient la base de données
 	 */
-
 	public void setFile(String file) {
 		this.file = file;
 	}
 
+	/**
+	 * Getter de la liste des utilisateurs
+	 * 
+	 * @return HashMap<String, Utilisateur> contenant le login de l'utilisateur ainsi que l'utilisateur lui-même
+	 */
 	public HashMap<String, Utilisateur> getListeUtilisateur(){
 		return utilisateurs;
 	}
 
+	/**
+	 * Getter de la liste des groupes
+	 * 
+	 * @return HashMap<Integer, Groupe> contenant l'ID du groupe ainsi que le groupe lui-même
+	 */
 	public HashMap<Integer, Groupe> getListeGroupe(){
 		return groupes;
 	}
 
+	/**
+	 * Charge la base de données
+	 * 
+	 * @return boolean indiquant la réussite ou non du chargement de la base de données
+	 */
 	public boolean loadDB(){
 		org.jdom2.Document document = null ;
 
@@ -154,6 +166,11 @@ public class UserDB {
 		return true;
 	}
 
+	/**
+	 * Sauvegarde la base de données
+	 * 
+	 * @return boolean indiquant la réussite ou non de la sauvegarde de la base de données
+	 */
 	public boolean saveDB(){
 		Element rootElmt = new Element("UsersDB");
 		org.jdom2.Document document = new Document(rootElmt);

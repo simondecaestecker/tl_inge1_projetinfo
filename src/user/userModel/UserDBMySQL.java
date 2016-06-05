@@ -7,32 +7,29 @@ import java.sql.SQLException;
 import java.sql.*;
 
 /**
+ * Cette classe gère la base de données d'utilisateurs. Elle doit permet de sauvegarder et charger les utilisateurs et les groupes à partir d'une base de données MySQL. 
  * 
- * Cette classe gÃ©re la base de donnÃ©es d'utilisateurs. Elle doit permettre de sauvegarder et charger les utilisateurs et les groupes Ã  partir d'un fichier XML. 
- * La structure du fichier XML devra Ãªtre la mÃªme que celle du fichier userDB.xml.
- * @see <a href="../../userDB.xml">userDB.xml</a> 
- * 
- * @author Jose Mennesson (Mettre Ã  jour)
- * @version 04/2016 (Mettre Ã  jour)
- * 
+ * @author Simon Decaestecker et Arthur Louchart
+ * @version 06/2016
  */
-
-//TODO Classe Ã  modifier
-
 public class UserDBMySQL {
+	/**
+	 * HashMap contenant le login de l'utilisateur ainsi que l'utilisateur lui-même
+	 */
 	private HashMap<String, Utilisateur> utilisateurs;
+
+	/**
+	 * HashMap contenant l'ID du groupe ainsi que le groupe lui-même
+	 */
 	private HashMap<Integer, Groupe> groupes;
 
+	/**
+	 * Administrateur permettant le chargement de la base de données au démarrage du programme
+	 */
 	private Administrateur root;
 
 	/**
-	 * 
-	 * Constructeur de UserDB. 
-	 * 
-	 * !!!!!!!!!!!! PENSEZ Ã€ AJOUTER UN ADMINISTRATEUR (su par exemple) QUI VOUS PERMETTRA DE CHARGER LA BASE DE DONNÃ‰ES AU DEMARRAGE DE L'APPLICATION !!!!!!
-	 * 
-	 * @param file
-	 * 		Le nom du fichier qui contient la base de donnÃ©es.
+	 * Constructeur de UserDB
 	 */
 	public UserDBMySQL(){
 		super();
@@ -46,14 +43,29 @@ public class UserDBMySQL {
 		loadDB(con);
 	}
 
+	/**
+	 * Getter de la liste des utilisateurs
+	 * 
+	 * @return HashMap<String, Utilisateur> contenant le login de l'utilisateur ainsi que l'utilisateur lui-même
+	 */
 	public HashMap<String, Utilisateur> getListeUtilisateur(){
 		return utilisateurs;
 	}
 
+	/**
+	 * Getter de la liste des groupes
+	 * 
+	 * @return HashMap<Integer, Groupe> contenant l'ID du groupe ainsi que le groupe lui-même
+	 */
 	public HashMap<Integer, Groupe> getListeGroupe(){
 		return groupes;
 	}
 
+	/**
+	 * Connexion à la base de données MySQL
+	 * 
+	 * @return Connection permettant l'accès à la base de données
+	 */
 	public Connection connectionMySQL() {
 		//Informations de connexion à la base de données
 		String protocole = "jdbc:mysql:";
@@ -76,6 +88,14 @@ public class UserDBMySQL {
 		return con;
 	}
 
+	/**
+	 * Charge la base de données
+	 * 
+	 * @param con
+	 * 		Connexion à la base de données
+	 * 
+	 * @return boolean indiquant la réussite ou non du chargement de la base de données
+	 */
 	public boolean loadDB(Connection con){
 		String sql = "SELECT * FROM groups";
 

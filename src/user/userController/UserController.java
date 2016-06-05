@@ -8,18 +8,15 @@ import userModel.UserDB;
 import userModel.Etudiant;
 import userModel.Administrateur;
 import userModel.Utilisateur;
+
 /**
- * Cette classe est le contrôleur d'utilisateurs que vous devez implémenter. 
- * Elle contient un attribut correspondant à la base de données utilisateurs que vous allez créer.
- * Elle contient toutes les fonctions de l'interface IUserController que vous devez implémenter.
+ * Cette classe est le contrôleur d'utilisateurs. 
+ * Elle contient un attribut correspondant à la base de données utilisateurs.
+ * Elle contient toutes les fonctions de l'interface IUserController.
  * 
- * @author Jose Mennesson (Mettre à jour)
- * @version 04/2016 (Mettre à jour)
- * 
+ * @author Simon Decaestecker et Arthur Louchart
+ * @version 06/2016
  */
-
-//TODO Classe à modifier
-
 public class UserController implements IUserController
 {
 	
@@ -41,6 +38,13 @@ public class UserController implements IUserController
 		this.setUserDB(userDB);
 	}
 
+	/**
+	 * Fonction permettant de récupérer le nom et le prénom de l'utilisateur à partir de son login
+	 * @param userLogin
+	 * 		Le login de l'utilisateur
+	 * @return
+	 * 		Une chaine de caractère contenant le prénom et le nom de l'utilisateur
+	 */
 	@Override
 	public String getUserName(String userLogin) {
 		if(userDB.getListeUtilisateur().containsKey(userLogin)){
@@ -51,6 +55,20 @@ public class UserController implements IUserController
 		}
 	}
 
+	/**
+	 * Fonction permettant de récupérer la classe de l'utilisateur à partir de son login et de son mot de passe. 
+	 * Elle renvoie :
+	 * 			- "" si l'utilisateur n'est pas reconnu (vérification du login et mdp).
+	 * 			- "Student" si l'utilisateur est un étudiant 
+	 *			- "Teacher" si l'utilisateur est un professeur
+	 *			- "Administrator" si l'utilisateur est un administrateur 
+	 * @param userLogin
+	 * 		Le login de l'utilisateur
+	 * @param userPwd
+	 * 		Le mot de passe de l'utilisateur
+	 * @return
+	 * 		Une chaine de caractère contenant la classe de l'utilisateur
+	 */
 	@Override
 	public String getUserClass(String userLogin, String userPwd) {
 		if(userDB.getListeUtilisateur().containsKey(userLogin)){
@@ -66,6 +84,13 @@ public class UserController implements IUserController
 		}
 	}
 
+	/**
+	 * Fonction permettant de récupérer l'identifiant de groupe de l'étudiant à partir de son login. Elle renvoie l'identifiant du groupe de l'étudiant s'il existe et -1 sinon.
+	 * @param studentLogin
+	 * 		Le login de l'étudiant
+	 * @return
+	 * 		L'identifiant de groupe de l'étudiant 
+	 */
 	@Override
 	public int getStudentGroup(String studentLogin) {
 		if(userDB.getListeUtilisateur().get(studentLogin) instanceof Etudiant){
@@ -76,6 +101,24 @@ public class UserController implements IUserController
 		}
 	}
 
+	/**
+	 * Fonction permettant d'ajouter un administrateur. Elle renvoie true si l'administrateur a été créé et false sinon. 
+	 * Cette fonction teste si l'administrateur existe déjà ou non, puis le sauvegarde dans la base de données.
+	 * @param adminLogin
+	 * 				Le login de l'administrateur qui va créer le nouvel administrateur.
+	 * @param newAdminlogin
+	 * 				Le login du nouvel administrateur.
+	 * @param adminID
+	 * 				L'identifiant du nouvel administrateur.
+	 * @param firstname
+	 * 				Le prénom du nouvel administrateur.
+	 * @param surname
+	 * 				Le nom du nouvel administrateur.
+	 * @param pwd
+	 * 				Le mot de passe du nouvel administrateur.
+	 * @return
+	 * 		Un boolean indiquant si l'administrateur a bien été créé
+	 */
 	@Override
 	public boolean addAdmin(String adminLogin, String newAdminlogin, int adminID, String firstname, String surname, String pwd) {
 		if (userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur) {
@@ -89,6 +132,24 @@ public class UserController implements IUserController
 		return false;
 	}
 
+	/**
+	 * Fonction permettant d'ajouter un professeur. Elle renvoie true si le professeur a été créé et false sinon. 
+	 * Cette fonction teste si le professeur existe déjà ou non, puis elle le sauvegarde dans la base de données.
+	 * @param adminLogin
+	 * 				Le login de l'administrateur qui va créer le nouveau professeur.
+	 * @param newteacherLogin
+	 * 				Le login du nouveau professeur.
+	 * @param teacherID
+	 * 				L'identifiant du nouveau professeur.
+	 * @param firstname
+	 * 				Le prénom du nouveau professeur.
+	 * @param surname
+	 * 				Le nom du nouveau professeur.
+	 * @param pwd
+	 * 				Le mot de passe du nouveau professeur.
+	 * @return
+	 * 		Un boolean indiquant si le nouveau professeur a bien été créé
+	 */
 	@Override
 	public boolean addTeacher(String adminLogin, String newteacherLogin, int teacherID, String firstname,
 			String surname, String pwd) {
@@ -103,6 +164,24 @@ public class UserController implements IUserController
 		return false;
 	}
 
+	/**
+	 * Fonction permettant d'ajouter un étudiant. Elle renvoie true si l'étudiant a été créé et false sinon. 
+	 * Cette fonction teste si l'étudiant existe déjà ou non, puis elle le sauvegarde dans la base de données.
+	 * @param adminLogin
+	 * 				Le login de l'administrateur qui va créer le nouvel étudiant.
+	 * @param newStudentLogin
+	 * 				Le login du nouvel étudiant.
+	 * @param studentID
+	 * 				L'identifiant du nouvel étudiant.
+	 * @param firstname
+	 * 				Le prénom du nouvel étudiant.
+	 * @param surname
+	 * 				Le nom du nouvel étudiant.
+	 * @param pwd
+	 * 				Le mot de passe du nouvel étudiant.
+	 * @return
+	 * 		Un boolean indiquant si le nouvel étudiant a bien été créé
+	 */
 	@Override
 	public boolean addStudent(String adminLogin, String newStudentLogin, int studentID, String firstname,
 			String surname, String pwd) {
@@ -117,6 +196,16 @@ public class UserController implements IUserController
 		return false;
 	}
 
+	/**
+	 * Fonction permettant de supprimer un utilisateur. Elle renvoie true si l'utilisateur a été supprimé et false sinon. 
+	 * Cette fonction teste si l'utilisateur existe ou non, puis elle le retire de la base de données.
+	 * @param adminLogin
+	 * 				Le login de l'administrateur qui va supprimer l'utilisateur.
+	 * @param userLogin
+	 * 				Le login d'utilisateur à supprimer.
+	 * @return
+	 * 		Un boolean indiquant si l'utilisateur a bien été supprimé.
+	 */
 	@Override
 	public boolean removeUser(String adminLogin, String userLogin) {
 		if (userDB.getListeUtilisateur().containsKey(adminLogin) && userDB.getListeUtilisateur().containsKey(userLogin)){
@@ -131,6 +220,16 @@ public class UserController implements IUserController
 		}
 	}
 
+	/**
+	 * Fonction permettant d'ajouter un groupe. Elle renvoie true si le groupe a été ajouté et false sinon. 
+	 * Cette fonction teste si le groupe existe déjà ou non, puis elle le crée et le sauvegarde dans la base de données. 
+	 * @param adminLogin
+	 * 				Le login de l'administrateur qui va créer le groupe.
+	 * @param groupId
+	 * 				L'identifiant du groupe à créer.
+	 * @return
+	 * 		Un boolean indiquant si le groupe a été créé.
+	 */
 	@Override
 	public boolean addGroup(String adminLogin, int groupId) {
 		if(groupId > 0 && userDB.getListeUtilisateur().containsKey(adminLogin) && (userDB.getListeGroupe().containsKey(groupId)==false)){
@@ -142,6 +241,16 @@ public class UserController implements IUserController
 		}
 	}
 
+	/**
+	 * Fonction permettant de supprimer un groupe. Elle renvoie true si le groupe a été supprimé et false sinon. 
+	 * Cette fonction teste si le groupe existe ou non, puis elle le retire de la base de données. 
+	 * @param adminLogin
+	 * 				Le login de l'administrateur qui va supprimer le groupe.
+	 * @param groupId
+	 * 				Identifiant du groupe à supprimer.
+	 * @return
+	 * 		Un boolean indiquant si le groupe a bien été supprimé.
+	 */
 	@Override
 	public boolean removeGroup(String adminLogin, int groupId) {
 		if(userDB.getListeUtilisateur().containsKey(adminLogin) && userDB.getListeGroupe().containsKey(groupId)){
@@ -154,6 +263,19 @@ public class UserController implements IUserController
 		}
 	}
 
+	/**
+	 * Fonction permettant d'associer un étudiant à un groupe. Elle renvoie true si l'association a été réalisée et false sinon. 
+	 * Cette fonction teste si l'étudiant et le groupe existent ou non, puis elle sauvegarde la base de données. 
+	 * @param adminLogin
+	 * 				Le login de l'administrateur qui va associer un étudiant à un groupe.
+	 * 
+	 * @param studentLogin
+	 * 				Login de l'étudiant
+	 * @param groupId
+	 * 				Identifiant du groupe.
+	 * @return
+	 * 		Un boolean indiquant si l'association a bien été réalisée.
+	 */
 	@Override
 	public boolean associateStudToGroup(String adminLogin, String studentLogin, int groupId) {		
 		if ((userDB.getListeUtilisateur().get(adminLogin) instanceof Administrateur) && userDB.getListeUtilisateur().containsKey(studentLogin) && userDB.getListeGroupe().containsKey(groupId)) {
@@ -173,6 +295,13 @@ public class UserController implements IUserController
 		}
 	}
 
+	/**
+	 * Fonction permettant de récupérer toutes les informations des utilisateurs sous la forme d'un 
+	 * tableau de chaînes de caractères où chaque ligne contient toutes les informations d'un utilisateur.
+	 * 
+	 * @return
+	 * 		Un tableau de String contenant toutes les infos de tous les utilisateurs.
+	 */
 	@Override
 	public String[] usersToString() {
 		String[] users = new String[userDB.getListeUtilisateur().size()];
@@ -195,6 +324,13 @@ public class UserController implements IUserController
 		return users;
 	}
 
+	/**
+	 * Fonction permettant de récupérer les logins des utilisateurs sous la forme d'un 
+	 * tableau de chaînes de caractères où chaque ligne contient le login d'un utilisateur.
+	 * 
+	 * @return
+	 * 		Un tableau de String contenant le login de tous les utilisateurs.
+	 */
 	@Override
 	public String[] usersLoginToString() {
 		String[] usersLogin = new String[userDB.getListeUtilisateur().size()];
@@ -206,6 +342,13 @@ public class UserController implements IUserController
 		return usersLogin;
 	}
 
+	/**
+	 * Fonction permettant de récupérer les logins des étudiants sous la forme d'un 
+	 * tableau de chaînes de caractères où chaque ligne contient le login d'un étudiant.
+	 * 
+	 * @return
+	 * 		Un tableau de String contenant le login de tous les étudiants.
+	 */
 	@Override
 	public String[] studentsLoginToString() {
 		String[] studentsLogin = new String[userDB.getListeUtilisateur().size()];
@@ -219,6 +362,13 @@ public class UserController implements IUserController
 		return studentsLogin;
 	}
 
+	/**
+	 * Fonction permettant de récupérer les identifiants des groupes sous la forme d'un 
+	 * tableau de chaînes de caractères où chaque ligne contient l'identifiant d'un groupe.
+	 * 
+	 * @return
+	 * 		Un tableau de String contenant l'identifiant de tous les groupes.
+	 */
 	@Override
 	public String[] groupsIdToString() {
 		String[] groupsId = new String[userDB.getListeGroupe().size()];
@@ -230,6 +380,13 @@ public class UserController implements IUserController
 		return groupsId;
 	}
 
+	/**
+	 * Fonction permettant de récupérer toutes les informations des groupes sous la forme d'un 
+	 * tableau de chaînes de caractères où chaque ligne contient les informations d'un groupe.
+	 * 
+	 * @return
+	 * 		Un tableau de String contenant toutes les informations de tous les groupes.
+	 */
 	@Override
 	public String[] groupsToString() {
 		String[] groups = new String[userDB.getListeGroupe().size()];
@@ -263,20 +420,39 @@ public class UserController implements IUserController
 		return groups;
 	}
 
+	/**
+	 * Fonction chargeant la base de donnée contenue dans un fichier XML.
+	 * @return
+	 * 		Un boolean indiquant si le chargement a bien été réalisée.
+	 */
 	@Override
 	public boolean loadDB() {
 		return userDB.loadDB();
 	}
 
+	/**
+	 * Fonction sauvegardant la base de donnée dans un fichier XML.
+	 * @return
+	 * 		Un boolean indiquant si la sauvegarde a bien été réalisée.
+	 */
 	@Override
 	public boolean saveDB() {
 		return userDB.saveDB();		
 	}
 
+	/**
+	 * Getter de l'attribut userDB
+	 * @return userDB
+	 */
 	public UserDB getUserDB() {
 		return userDB;
 	}
 
+	/**
+	 * Setter de l'attribut userDB
+	 * @param userDB
+	 * @return userDB
+	 */
 	public void setUserDB(UserDB userDB) {
 		this.userDB = userDB;
 	}

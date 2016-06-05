@@ -10,8 +10,6 @@ package userController;
  * @version 04/2016
  */
 
-//TODO Classe à ne pas modifier
-
 public interface IUserController{ 
 	/**
 	 * Fonction permettant de récupérer le nom et le prénom de l'utilisateur à partir de son login
