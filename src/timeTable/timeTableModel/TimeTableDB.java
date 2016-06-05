@@ -95,7 +95,7 @@ public class TimeTableDB {
 		Element rootElt;
 		SAXBuilder sxb = new SAXBuilder();
 		try{
-			document = sxb.build(new File("timeTableDB.xml"));
+			document = sxb.build(new File(this.file));
 		}catch(Exception e){
 			return false ;
 		}
@@ -270,7 +270,7 @@ public class TimeTableDB {
 		
 		try{
 			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-			sortie.output(document, new FileOutputStream("timeTableDB.xml"));
+			sortie.output(document, new FileOutputStream(this.file));
 			return true ;
 		}catch (java.io.IOException e){
 			return false ;
